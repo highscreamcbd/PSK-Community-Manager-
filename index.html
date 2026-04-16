@@ -1,0 +1,1485 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Psykotik Sound Kartel — Community Manager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;900&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --vert:   #C8FF00;
+    --noir:   #080808;
+    --creme:  #F5F0EB;
+    --rouge:  #FF3B3B;
+    --gris:   #1a1a1a;
+    --gris2:  #2a2a2a;
+    --gris3:  #3a3a3a;
+    --texte:  #e0e0e0;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--noir);
+    color: var(--texte);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+  }
+
+  /* ─── NAV ─── */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(8,8,8,0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #222;
+    display: flex; align-items: center; gap: 0;
+    padding: 0 24px; height: 56px;
+  }
+  .nav-logo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 22px;
+    color: var(--vert); letter-spacing: 2px;
+    margin-right: 32px; text-transform: uppercase;
+  }
+  .nav-logo span { color: var(--creme); }
+  .nav-tabs { display: flex; gap: 4px; flex: 1; }
+  .nav-tab {
+    padding: 6px 16px; border-radius: 6px; border: none;
+    background: transparent; color: #888;
+    font-family: 'Space Mono', monospace; font-size: 11px;
+    cursor: pointer; transition: all .2s; text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .nav-tab:hover { color: var(--creme); background: #1a1a1a; }
+  .nav-tab.active { background: var(--vert); color: var(--noir); font-weight: 700; }
+  .nav-badge {
+    background: var(--rouge); color: #fff;
+    font-size: 9px; border-radius: 10px; padding: 1px 5px;
+    margin-left: 4px; font-family: 'Space Mono', monospace;
+  }
+
+  /* ─── PAGES ─── */
+  .page { display: none; padding: 72px 24px 40px; max-width: 1100px; margin: 0 auto; }
+  .page.active { display: block; }
+
+  /* ─── CARDS ─── */
+  .card {
+    background: var(--gris); border: 1px solid #333;
+    border-radius: 12px; padding: 24px; margin-bottom: 20px;
+  }
+  .card-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 14px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--vert); margin-bottom: 16px;
+  }
+  .card-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 16px;
+  }
+
+  /* ─── GRID ─── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+  /* ─── STAT ─── */
+  .stat {
+    background: var(--gris2); border-radius: 10px; padding: 20px;
+    border: 1px solid #333; text-align: center;
+  }
+  .stat-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 36px; color: var(--vert);
+    line-height: 1;
+  }
+  .stat-label { font-size: 11px; color: #777; margin-top: 4px; font-family: 'Space Mono', monospace; }
+
+  /* ─── BADGE ─── */
+  .badge {
+    display: inline-block; padding: 3px 10px; border-radius: 20px;
+    font-size: 11px; font-family: 'Space Mono', monospace;
+    font-weight: 700; text-transform: uppercase;
+  }
+  .badge-vert { background: rgba(200,255,0,0.15); color: var(--vert); border: 1px solid rgba(200,255,0,0.3); }
+  .badge-rouge { background: rgba(255,59,59,0.15); color: var(--rouge); border: 1px solid rgba(255,59,59,0.3); }
+  .badge-gris { background: #333; color: #aaa; border: 1px solid #444; }
+  .badge-orange { background: rgba(255,160,0,0.15); color: #FFA000; border: 1px solid rgba(255,160,0,0.3); }
+
+  /* ─── BTN ─── */
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 20px; border-radius: 8px; border: none;
+    font-family: 'Space Mono', monospace; font-size: 12px;
+    font-weight: 700; cursor: pointer; transition: all .2s;
+    text-transform: uppercase; letter-spacing: 1px; text-decoration: none;
+  }
+  .btn-vert { background: var(--vert); color: var(--noir); }
+  .btn-vert:hover { background: #a8d900; }
+  .btn-outline { background: transparent; color: var(--vert); border: 1px solid var(--vert); }
+  .btn-outline:hover { background: rgba(200,255,0,0.1); }
+  .btn-rouge { background: var(--rouge); color: #fff; }
+  .btn-gris { background: var(--gris2); color: var(--creme); border: 1px solid #444; }
+  .btn-gris:hover { background: var(--gris3); }
+  .btn-sm { padding: 6px 14px; font-size: 11px; }
+  .btn-full { width: 100%; justify-content: center; }
+
+  /* ─── INPUT ─── */
+  .input, .select, .textarea {
+    width: 100%; background: var(--gris2); border: 1px solid #444;
+    border-radius: 8px; padding: 10px 14px;
+    color: var(--creme); font-family: 'Inter', sans-serif; font-size: 14px;
+    outline: none; transition: border-color .2s;
+  }
+  .input:focus, .select:focus, .textarea:focus { border-color: var(--vert); }
+  .input::placeholder, .textarea::placeholder { color: #555; }
+  .textarea { resize: vertical; min-height: 80px; }
+  label { display: block; font-size: 12px; color: #888; margin-bottom: 6px; font-family: 'Space Mono', monospace; }
+
+  /* ─── FORM GROUP ─── */
+  .form-group { margin-bottom: 16px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+
+  /* ─── HEADING ─── */
+  h1 { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 36px; color: var(--creme); margin-bottom: 8px; }
+  h2 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 22px; color: var(--creme); margin-bottom: 16px; }
+  h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 16px; color: var(--creme); margin-bottom: 8px; }
+  p { line-height: 1.6; color: #aaa; }
+
+  /* ─── ALERT ─── */
+  .alert {
+    border-radius: 8px; padding: 14px 18px; margin-bottom: 16px;
+    font-size: 13px; line-height: 1.5; display: flex; gap: 12px; align-items: flex-start;
+  }
+  .alert-vert { background: rgba(200,255,0,0.1); border: 1px solid rgba(200,255,0,0.25); color: var(--vert); }
+  .alert-rouge { background: rgba(255,59,59,0.1); border: 1px solid rgba(255,59,59,0.25); color: var(--rouge); }
+  .alert-orange { background: rgba(255,160,0,0.1); border: 1px solid rgba(255,160,0,0.25); color: #FFA000; }
+  .alert-info { background: rgba(100,150,255,0.1); border: 1px solid rgba(100,150,255,0.25); color: #7090FF; }
+  .alert-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+  /* ─── TAG LIST ─── */
+  .tag-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .tag {
+    padding: 4px 12px; border-radius: 20px; font-size: 12px;
+    background: #252525; border: 1px solid #3a3a3a; color: #aaa;
+    cursor: pointer; transition: all .2s; font-family: 'Space Mono', monospace;
+  }
+  .tag:hover, .tag.selected { background: rgba(200,255,0,0.15); border-color: var(--vert); color: var(--vert); }
+
+  /* ─── TIMELINE ─── */
+  .timeline { position: relative; padding-left: 24px; }
+  .timeline::before { content: ''; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px; background: #333; }
+  .timeline-item { position: relative; margin-bottom: 20px; }
+  .timeline-dot {
+    position: absolute; left: -20px; top: 4px;
+    width: 12px; height: 12px; border-radius: 50%;
+    border: 2px solid var(--vert); background: var(--noir);
+  }
+  .timeline-dot.done { background: var(--vert); }
+  .timeline-dot.urgent { border-color: var(--rouge); background: var(--rouge); }
+  .timeline-label { font-size: 11px; color: var(--vert); font-family: 'Space Mono', monospace; margin-bottom: 4px; }
+  .timeline-text { font-size: 13px; color: #bbb; }
+
+  /* ─── CONTENT SLIDE PREVIEW ─── */
+  .slide-preview {
+    background: var(--creme); border-radius: 10px;
+    aspect-ratio: 4/5; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; padding: 24px;
+    text-align: center; position: relative; overflow: hidden;
+    border: 3px solid var(--vert);
+  }
+  .slide-preview::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px;
+    background: var(--vert);
+  }
+  .slide-num {
+    position: absolute; top: 16px; right: 16px;
+    font-family: 'Space Mono', monospace; font-size: 10px;
+    color: #999;
+  }
+  .slide-text {
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+    font-size: clamp(24px, 4vw, 36px); color: var(--noir);
+    line-height: .9; text-transform: uppercase;
+    word-break: keep-all; hyphens: none;
+  }
+
+  /* ─── TENDANCE ITEM ─── */
+  .trend-item {
+    background: var(--gris2); border: 1px solid #333; border-radius: 10px;
+    padding: 16px; display: flex; align-items: center; gap: 14px;
+    margin-bottom: 10px; cursor: pointer; transition: border-color .2s;
+  }
+  .trend-item:hover { border-color: var(--vert); }
+  .trend-rank {
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+    font-size: 28px; color: var(--vert); min-width: 40px; text-align: center;
+  }
+  .trend-content { flex: 1; }
+  .trend-title { font-size: 14px; font-weight: 600; color: var(--creme); margin-bottom: 4px; }
+  .trend-meta { font-size: 11px; color: #666; font-family: 'Space Mono', monospace; }
+  .trend-score { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--vert); }
+
+  /* ─── PILL SELECTOR ─── */
+  .pill-group { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+  .pill {
+    padding: 6px 16px; border-radius: 20px; font-size: 12px;
+    border: 1px solid #444; background: #222; color: #888;
+    cursor: pointer; transition: all .2s; font-family: 'Space Mono', monospace;
+  }
+  .pill:hover { border-color: #666; color: #ccc; }
+  .pill.active { background: rgba(200,255,0,0.15); border-color: var(--vert); color: var(--vert); }
+
+  /* ─── DIVIDER ─── */
+  .divider { height: 1px; background: #2a2a2a; margin: 20px 0; }
+
+  /* ─── STEP ─── */
+  .step { display: flex; gap: 16px; margin-bottom: 20px; align-items: flex-start; }
+  .step-num {
+    width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+    background: rgba(200,255,0,0.15); border: 1px solid var(--vert);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 700; color: var(--vert);
+  }
+  .step-content h3 { margin-bottom: 4px; }
+  .step-content p { font-size: 13px; }
+
+  /* ─── CALENDAR GRID ─── */
+  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+  .cal-header { font-size: 10px; text-align: center; color: #666; padding: 6px 0; font-family: 'Space Mono', monospace; }
+  .cal-day {
+    background: var(--gris2); border: 1px solid #333; border-radius: 6px;
+    padding: 8px 6px; min-height: 70px; cursor: pointer; transition: border-color .2s;
+  }
+  .cal-day:hover { border-color: var(--vert); }
+  .cal-day.has-event { border-color: rgba(200,255,0,0.4); background: rgba(200,255,0,0.05); }
+  .cal-day.today { border-color: var(--vert); }
+  .cal-day-num { font-size: 11px; color: #666; font-family: 'Space Mono', monospace; margin-bottom: 4px; }
+  .cal-event {
+    font-size: 9px; background: rgba(200,255,0,0.2); color: var(--vert);
+    border-radius: 3px; padding: 2px 4px; margin-top: 2px;
+    font-family: 'Space Mono', monospace; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+  }
+  .cal-event.rouge { background: rgba(255,59,59,0.2); color: var(--rouge); }
+
+  /* ─── SEPARATOR ─── */
+  .section-title {
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+    font-size: 28px; color: var(--creme); margin-bottom: 4px;
+  }
+  .section-sub { font-size: 13px; color: #666; margin-bottom: 24px; }
+
+  /* ─── GENERATED CONTENT ─── */
+  .generated-block {
+    background: #111; border: 1px solid #333; border-radius: 10px;
+    padding: 20px; margin-top: 16px; font-family: 'Space Mono', monospace; font-size: 12px;
+  }
+  .generated-block .line { margin-bottom: 8px; color: #aaa; line-height: 1.6; }
+  .generated-block .hook { color: var(--vert); font-weight: 700; font-size: 14px; }
+  .generated-block .slide-label { color: var(--rouge); font-size: 10px; text-transform: uppercase; letter-spacing: 1px; }
+
+  /* ─── DEADLINE BOX ─── */
+  .deadline-box {
+    background: rgba(200,255,0,0.08); border: 1px solid rgba(200,255,0,0.2);
+    border-radius: 10px; padding: 20px; margin-top: 16px;
+  }
+  .deadline-box.urgent {
+    background: rgba(255,59,59,0.08); border-color: rgba(255,59,59,0.3);
+  }
+  .deadline-title {
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+    font-size: 20px; color: var(--vert); margin-bottom: 8px;
+  }
+  .deadline-box.urgent .deadline-title { color: var(--rouge); }
+
+  /* COPY BUTTON */
+  .copy-btn {
+    float: right; background: transparent; border: 1px solid #444;
+    color: #888; border-radius: 4px; padding: 2px 8px; font-size: 10px;
+    cursor: pointer; font-family: 'Space Mono', monospace;
+  }
+  .copy-btn:hover { border-color: var(--vert); color: var(--vert); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .nav-tabs { gap: 2px; overflow-x: auto; }
+    .nav-tab { font-size: 9px; padding: 6px 10px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">PSK <span>Kartel</span></div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showPage('dashboard')">📊 Dashboard</button>
+    <button class="nav-tab" onclick="showPage('content')">✍️ Contenu</button>
+    <button class="nav-tab" onclick="showPage('calendar')">📅 Calendrier</button>
+    <button class="nav-tab" onclick="showPage('trends')">🔥 Tendances</button>
+    <button class="nav-tab" onclick="showPage('chartres')">🏛️ Chartres <span class="nav-badge">NEW</span></button>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════
+     PAGE : DASHBOARD
+══════════════════════════════════════════ -->
+<div id="page-dashboard" class="page active">
+  <h1>Psykotik Sound Kartel 🟢</h1>
+  <p class="section-sub">@psykotik_sound_kartel_ · L'énergie urbaine engagée · Depuis 2003 · Chartres & alentours</p>
+
+  <!-- STATS -->
+  <div class="grid-4" style="margin-bottom:20px;">
+    <div class="stat">
+      <div class="stat-num" style="color:#1877F2">4,6K</div>
+      <div class="stat-label">Abonnés Facebook</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">341</div>
+      <div class="stat-label">Abonnés Instagram</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num" style="color:var(--vert)">3</div>
+      <div class="stat-label">Events à venir</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num" style="color:#FFA000">23</div>
+      <div class="stat-label">Ans d'histoire (2003)</div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <!-- ACTIONS URGENTES -->
+    <div class="card">
+      <div class="card-title">⚡ Actions cette semaine</div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot urgent"></div>
+          <div class="timeline-label">🔴 DANS 37 JOURS — 13 mai 2026</div>
+          <div class="timeline-text"><strong>NOPAL DJ SET : Downtempo / Minimal to Deephouse</strong> · 16h00 · Nopal Chartres → Publier teaser cette semaine !</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot urgent"></div>
+          <div class="timeline-label">🔴 DANS 41 JOURS — 17 mai 2026</div>
+          <div class="timeline-text"><strong>Guinguette Electro</strong> · 14h00 · Organisé par PSK → Préparer communication dès maintenant</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-label">🟡 À anticiper — 31 oct 2026</div>
+          <div class="timeline-text"><strong>RDV Culturels Electro Dub 4 : Girls on Decks</strong> · Salle des Fêtes de Mainvilliers → Dossier Mairie à déposer avant le 1er août</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-label">🟢 Stratégie</div>
+          <div class="timeline-text">Facebook 4 600 vs Instagram 341 — créer ponts entre les 2 plateformes pour migrer l'audience</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-label">🟢 Contenu</div>
+          <div class="timeline-text">Valoriser le 23e anniversaire PSK (2003→2026) — carrousel historique fort</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROFIL -->
+    <div class="card">
+      <div class="card-title">🎧 Profil PSK</div>
+      <div style="margin-bottom:12px;">
+        <div style="font-size:18px; font-family:'Barlow Condensed',sans-serif; font-weight:900; color:var(--creme); margin-bottom:2px;">@psykotik_sound_kartel_</div>
+        <div style="font-size:12px; color:#666; font-family:'Space Mono',monospace; margin-bottom:4px;">fb: psk.assos · 4 600 abonnés · assopsk.fr · linktr.ee/psk.crew</div>
+        <p style="font-size:13px; color:var(--vert); font-style:italic;">"L'énergie urbaine engagée."</p>
+        <div style="font-size:11px; color:#555; margin-top:4px;">Sound system 2003 · Saisie 2007 & 2013 · Asso loi 1901 depuis 2008 · <strong style="color:#FFA000">23e anniversaire 2026</strong></div>
+      </div>
+      <div class="divider"></div>
+      <div style="margin-bottom:10px;">
+        <div class="badge badge-vert" style="margin-bottom:6px;">🎧 Musique</div>
+        <div class="tag-list">
+          <span class="tag">Techno</span><span class="tag">Tekno</span><span class="tag">Psytrance</span>
+          <span class="tag">Dub</span><span class="tag">Reggae</span><span class="tag">Deephouse</span>
+          <span class="tag">Minimal</span><span class="tag">Downtempo</span>
+        </div>
+      </div>
+      <div style="margin-bottom:10px;">
+        <div class="badge badge-orange" style="margin-bottom:6px;">🎨 Culture urbaine</div>
+        <div class="tag-list">
+          <span class="tag">Street Art</span><span class="tag">Graff</span><span class="tag">Culture urbaine</span>
+        </div>
+      </div>
+      <div style="margin-bottom:10px;">
+        <div class="badge badge-rouge" style="margin-bottom:6px;">📍 Lieux habituels</div>
+        <div class="tag-list">
+          <span class="tag">Nopal Bar Chartres</span><span class="tag">Parc André Gagnon</span>
+          <span class="tag">Salle des Fêtes Mainvilliers</span><span class="tag">Salle André Malraux</span>
+          <span class="tag">Foyer Accueil Chartrain</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div style="font-size:12px; color:#777; font-family:'Space Mono',monospace;">
+        📍 Mainvilliers (28300) · Chartres & alentours
+      </div>
+    </div>
+  </div>
+
+  <!-- EVENTS À VENIR -->
+  <div class="card">
+    <div class="card-title">🎪 Événements à venir — Source Facebook</div>
+    <div style="display:flex; flex-direction:column; gap:10px;">
+
+      <div style="background:#1a1a1a; border-radius:10px; padding:16px; border-left:4px solid var(--rouge); display:flex; gap:16px; align-items:flex-start;">
+        <div style="text-align:center; min-width:56px;">
+          <div style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:28px; color:var(--rouge); line-height:1;">13</div>
+          <div style="font-size:10px; color:#666; font-family:'Space Mono',monospace;">MAI</div>
+        </div>
+        <div style="flex:1;">
+          <div style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:16px; color:var(--creme);">NOPAL DJ SET : Downtempo / Minimal to Deephouse</div>
+          <div style="font-size:12px; color:#888; margin-top:4px;">16:00 · Nopal_Chartres · Chartres</div>
+          <div style="margin-top:8px; display:flex; gap:8px; flex-wrap:wrap;">
+            <span class="badge badge-rouge">Résidence mensuelle</span>
+            <span class="badge badge-gris">Teaser à publier maintenant !</span>
+          </div>
+        </div>
+        <a href="https://www.facebook.com/psk.assos/events" target="_blank" class="btn btn-outline btn-sm" style="flex-shrink:0;">FB →</a>
+      </div>
+
+      <div style="background:#1a1a1a; border-radius:10px; padding:16px; border-left:4px solid var(--rouge); display:flex; gap:16px; align-items:flex-start;">
+        <div style="text-align:center; min-width:56px;">
+          <div style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:28px; color:var(--rouge); line-height:1;">17</div>
+          <div style="font-size:10px; color:#666; font-family:'Space Mono',monospace;">MAI</div>
+        </div>
+        <div style="flex:1;">
+          <div style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:16px; color:var(--creme);">Guinguette Electro</div>
+          <div style="font-size:12px; color:#888; margin-top:4px;">14:00 · Lieu à confirmer</div>
+          <div style="margin-top:8px; display:flex; gap:8px; flex-wrap:wrap;">
+            <span class="badge badge-vert">Outdoor / Open Air</span>
+            <span class="badge badge-gris">Communication à préparer</span>
+          </div>
+        </div>
+        <a href="https://www.facebook.com/psk.assos/events" target="_blank" class="btn btn-outline btn-sm" style="flex-shrink:0;">FB →</a>
+      </div>
+
+      <div style="background:#1a1a1a; border-radius:10px; padding:16px; border-left:4px solid #FFA000; display:flex; gap:16px; align-items:flex-start;">
+        <div style="text-align:center; min-width:56px;">
+          <div style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:28px; color:#FFA000; line-height:1;">31</div>
+          <div style="font-size:10px; color:#666; font-family:'Space Mono',monospace;">OCT</div>
+        </div>
+        <div style="flex:1;">
+          <div style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:16px; color:var(--creme);">RDV Culturels Electro Dub 4 : Girls on Decks</div>
+          <div style="font-size:12px; color:#888; margin-top:4px;">20:00 · Salle des Fêtes de Mainvilliers</div>
+          <div style="margin-top:8px; display:flex; gap:8px; flex-wrap:wrap;">
+            <span class="badge badge-orange">Événement culturel</span>
+            <span class="badge badge-gris">Dossier mairie avant août</span>
+          </div>
+        </div>
+        <a href="https://www.facebook.com/psk.assos/events" target="_blank" class="btn btn-outline btn-sm" style="flex-shrink:0;">FB →</a>
+      </div>
+
+    </div>
+    <div class="divider"></div>
+    <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+      <span style="font-size:12px; color:#555;">Historique récent :</span>
+      <span class="badge badge-gris">Nopal Reggaeton→Electro (4 avr)</span>
+      <span class="badge badge-gris">Nopal House→Techno (7 mars)</span>
+      <span class="badge badge-gris">AG PSK 2026 (13 fév)</span>
+      <span class="badge badge-gris">Dub to Psytrance (12 déc)</span>
+      <span class="badge badge-gris">Reggae Dub Xmas #15 (7 nov)</span>
+      <span class="badge badge-gris">Open Air Dub→Electro (8 juin)</span>
+      <span class="badge badge-gris">🎂 PSK 21st Anniversary (21 juin 2025)</span>
+    </div>
+  </div>
+
+  <!-- 5 PILIERS -->
+  <div class="card">
+    <div class="card-title">📐 Tes 5 piliers éditoriaux</div>
+    <div class="grid-5" style="display:grid; grid-template-columns: repeat(5,1fr); gap:12px;">
+      <div style="text-align:center; padding:16px; background:#1a1a1a; border-radius:8px; border:1px solid #333;">
+        <div style="font-size:24px; margin-bottom:8px;">🎪</div>
+        <div style="font-family:'Barlow Condensed',sans-serif; font-weight:700; color:var(--creme); font-size:14px;">EVENTS</div>
+        <div style="font-size:11px; color:#666; margin-top:4px;">Annonces, flyers, teasers, after</div>
+        <div class="badge badge-vert" style="margin-top:8px; font-size:9px;">PORTÉE</div>
+      </div>
+      <div style="text-align:center; padding:16px; background:#1a1a1a; border-radius:8px; border:1px solid #333;">
+        <div style="font-size:24px; margin-bottom:8px;">🎛️</div>
+        <div style="font-family:'Barlow Condensed',sans-serif; font-weight:700; color:var(--creme); font-size:14px;">SCÈNE LIVE</div>
+        <div style="font-size:11px; color:#666; margin-top:4px;">Extraits sets, ambiance, foule</div>
+        <div class="badge badge-vert" style="margin-top:8px; font-size:9px;">PORTÉE</div>
+      </div>
+      <div style="text-align:center; padding:16px; background:#1a1a1a; border-radius:8px; border:1px solid #333;">
+        <div style="font-size:24px; margin-bottom:8px;">🎨</div>
+        <div style="font-family:'Barlow Condensed',sans-serif; font-weight:700; color:var(--creme); font-size:14px;">STREET ART</div>
+        <div style="font-size:11px; color:#666; margin-top:4px;">Graff, artistes, culture urbaine</div>
+        <div class="badge badge-orange" style="margin-top:8px; font-size:9px;">IDENTITÉ</div>
+      </div>
+      <div style="text-align:center; padding:16px; background:#1a1a1a; border-radius:8px; border:1px solid #333;">
+        <div style="font-size:24px; margin-bottom:8px;">🤝</div>
+        <div style="font-family:'Barlow Condensed',sans-serif; font-weight:700; color:var(--creme); font-size:14px;">COLLECTIF</div>
+        <div style="font-size:11px; color:#666; margin-top:4px;">Membres, valeurs, engagement</div>
+        <div class="badge badge-rouge" style="margin-top:8px; font-size:9px;">FIDÉLISATION</div>
+      </div>
+      <div style="text-align:center; padding:16px; background:#1a1a1a; border-radius:8px; border:1px solid #333;">
+        <div style="font-size:24px; margin-bottom:8px;">📍</div>
+        <div style="font-family:'Barlow Condensed',sans-serif; font-weight:700; color:var(--creme); font-size:14px;">LOCAL</div>
+        <div style="font-size:11px; color:#666; margin-top:4px;">Chartres, scène underground 28</div>
+        <div class="badge badge-gris" style="margin-top:8px; font-size:9px;">ANCRAGE</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE : CONTENU (YUKOCODE)
+══════════════════════════════════════════ -->
+<div id="page-content" class="page">
+  <div class="section-title">Générateur YUKOCODE</div>
+  <div class="section-sub">Crée les slides Instagram de Psykotik Sound Kartel en 7 messages — Techno · Street Art · Engagement</div>
+
+  <div class="grid-2">
+    <div>
+      <!-- PARAMÈTRES -->
+      <div class="card">
+        <div class="card-title">⚙️ Paramètres du concept</div>
+
+        <div class="form-group">
+          <label>PILIER ÉDITORIAL</label>
+          <div class="pill-group" id="pilier-group">
+            <span class="pill active" data-val="events">🎪 Events</span>
+            <span class="pill" data-val="preuve">🎛️ Scène live</span>
+            <span class="pill" data-val="streetart">🎨 Street Art</span>
+            <span class="pill" data-val="collectif">🤝 Collectif</span>
+            <span class="pill" data-val="local">📍 Local</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>MÉCANISME PSYCHOLOGIQUE (MSG0)</label>
+          <select class="select" id="psycho-select">
+            <option value="contrarian">Contrarian — "Ce que personne ne dit sur..."</option>
+            <option value="confession">Confession terrain — "J'ai joué devant 12 personnes..."</option>
+            <option value="secret">Secret de pro — "Voici ce que font les vrais DJs..."</option>
+            <option value="before-after">Avant / Après — "Il y a 10 ans vs aujourd'hui"</option>
+            <option value="erreur">Erreur commune — "L'erreur qui tue l'ambiance"</option>
+            <option value="liste">Liste autorité — "3 choses que..."</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>CONTEXTE / ANGLE SPÉCIFIQUE</label>
+          <input class="input" id="angle-input" type="text" placeholder="ex: ma résidence au Nopal Bar, Chartres..." />
+        </div>
+
+        <div class="form-group">
+          <label>AUDIENCE CIBLE</label>
+          <div class="pill-group" id="audience-group">
+            <span class="pill active" data-val="general">Tous publics</span>
+            <span class="pill" data-val="ravers">Ravers / Clubbers</span>
+            <span class="pill" data-val="artistes">Artistes / Street Art</span>
+            <span class="pill" data-val="chartres">Chartres / 28</span>
+          </div>
+        </div>
+
+        <button class="btn btn-vert btn-full" onclick="generateContent()">
+          ⚡ Générer les 7 slides YUKOCODE
+        </button>
+      </div>
+
+      <!-- HASHTAGS -->
+      <div class="card">
+        <div class="card-title"># Hashtags recommandés</div>
+        <div class="tag-list" id="hashtag-list">
+          <span class="tag selected">#psykotiksoundkartel</span>
+          <span class="tag selected">#pskkartel</span>
+          <span class="tag selected">#chartres</span>
+          <span class="tag selected">#techno</span>
+          <span class="tag selected">#tekno</span>
+          <span class="tag selected">#psytrance</span>
+          <span class="tag selected">#streetart</span>
+          <span class="tag selected">#underground</span>
+          <span class="tag selected">#rave</span>
+          <span class="tag selected">#energieurbaine</span>
+          <span class="tag">#hardtek</span>
+          <span class="tag">#eureetloir</span>
+          <span class="tag">#associationculturelle</span>
+          <span class="tag">#collectifmusicaux</span>
+          <span class="tag">#scenelocale</span>
+          <span class="tag">#freerave</span>
+          <span class="tag">#graff</span>
+          <span class="tag">#culture28</span>
+          <span class="tag">#chartresunderground</span>
+          <span class="tag">#ravechartres</span>
+        </div>
+        <div style="margin-top:12px; display:flex; justify-content:flex-end;">
+          <button class="btn btn-outline btn-sm" onclick="copyHashtags()">📋 Copier sélection</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDES OUTPUT -->
+    <div>
+      <div class="card" id="slides-output">
+        <div class="card-title">📱 Prévisualisation des 7 slides</div>
+        <div id="slides-container">
+          <div style="text-align:center; padding:40px; color:#444;">
+            <div style="font-size:48px; margin-bottom:16px;">⚡</div>
+            <div style="font-family:'Barlow Condensed',sans-serif; font-size:18px; color:#666;">Configure tes paramètres<br>et génère les slides</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LÉGENDE -->
+      <div class="card" id="legende-card" style="display:none;">
+        <div class="card-title">✍️ Légende Instagram</div>
+        <div id="legende-output" class="generated-block"></div>
+        <button class="btn btn-outline btn-sm" style="margin-top:12px;" onclick="copyLegende()">📋 Copier la légende</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE : CALENDRIER
+══════════════════════════════════════════ -->
+<div id="page-calendar" class="page">
+  <div class="section-title">Calendrier Éditorial</div>
+  <div class="section-sub">Planifie et visualise tes publications · Mai 2026 — 2 events ce mois !</div>
+
+  <!-- HEADER CALENDRIER -->
+  <div class="card">
+    <div class="card-header">
+      <div>
+        <div style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:24px; color:var(--creme);">Mai 2026</div>
+        <div style="font-size:12px; color:#666;">3–5 posts/semaine · <span style="color:var(--rouge);">🔴 Nopal 13 mai</span> · <span style="color:var(--rouge);">🌿 Guinguette 17 mai</span></div>
+      </div>
+      <button class="btn btn-outline btn-sm" onclick="addEvent()">+ Ajouter un post</button>
+    </div>
+    <div class="cal-grid" id="cal-headers">
+      <div class="cal-header">LUN</div>
+      <div class="cal-header">MAR</div>
+      <div class="cal-header">MER</div>
+      <div class="cal-header">JEU</div>
+      <div class="cal-header">VEN</div>
+      <div class="cal-header">SAM</div>
+      <div class="cal-header">DIM</div>
+    </div>
+    <div class="cal-grid" id="cal-grid" style="margin-top:8px;"></div>
+  </div>
+
+  <!-- PLAN 30 JOURS -->
+  <div class="card">
+    <div class="card-title">📋 Plan 30 jours — Types de contenu</div>
+    <div class="grid-2">
+      <div>
+        <h3 style="margin-bottom:12px;">Semaine type</h3>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <div style="background:#1a1a1a; border-radius:8px; padding:12px; display:flex; gap:12px; align-items:center;">
+            <span style="font-family:'Space Mono',monospace; font-size:11px; color:var(--vert); min-width:40px;">LUN</span>
+            <span style="font-size:13px; color:#bbb;">Reel coulisses / setup</span>
+            <span class="badge badge-gris" style="margin-left:auto;">🎛️</span>
+          </div>
+          <div style="background:#1a1a1a; border-radius:8px; padding:12px; display:flex; gap:12px; align-items:center;">
+            <span style="font-family:'Space Mono',monospace; font-size:11px; color:var(--vert); min-width:40px;">MER</span>
+            <span style="font-size:13px; color:#bbb;">Carousel YUKOCODE éducatif</span>
+            <span class="badge badge-orange" style="margin-left:auto;">🎓</span>
+          </div>
+          <div style="background:#1a1a1a; border-radius:8px; padding:12px; display:flex; gap:12px; align-items:center;">
+            <span style="font-family:'Space Mono',monospace; font-size:11px; color:var(--vert); min-width:40px;">VEN</span>
+            <span style="font-size:13px; color:#bbb;">Reel live / ambiance</span>
+            <span class="badge badge-vert" style="margin-left:auto;">🎬</span>
+          </div>
+          <div style="background:#1a1a1a; border-radius:8px; padding:12px; display:flex; gap:12px; align-items:center;">
+            <span style="font-family:'Space Mono',monospace; font-size:11px; color:var(--vert); min-width:40px;">DIM</span>
+            <span style="font-size:13px; color:#bbb;">Story sondage + CTA réservation</span>
+            <span class="badge badge-rouge" style="margin-left:auto;">📍</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h3 style="margin-bottom:12px;">Accroches performantes</h3>
+        <div style="display:flex; flex-direction:column; gap:8px;" id="hooks-list">
+          <div class="trend-item" style="padding:12px; cursor:default;">
+            <div class="trend-content">
+              <div class="trend-title" style="font-size:13px;">"Ce que personne ne dit sur la scène tekno underground à Chartres..."</div>
+              <div class="trend-meta">Pilier : Local · Format : Carousel YUKOCODE</div>
+            </div>
+            <button class="btn btn-outline btn-sm" onclick="copyText(this)" data-text="Ce que personne ne dit sur la scène tekno underground à Chartres...">Copier</button>
+          </div>
+          <div class="trend-item" style="padding:12px; cursor:default;">
+            <div class="trend-content">
+              <div class="trend-title" style="font-size:13px;">"On a organisé ça avec 0 budget. Voilà comment."</div>
+              <div class="trend-meta">Pilier : Collectif · Format : Reel coulisses</div>
+            </div>
+            <button class="btn btn-outline btn-sm" onclick="copyText(this)" data-text="On a organisé ça avec 0 budget. Voilà comment.">Copier</button>
+          </div>
+          <div class="trend-item" style="padding:12px; cursor:default;">
+            <div class="trend-content">
+              <div class="trend-title" style="font-size:13px;">"Street Art + Tekno : deux cultures, un seul esprit. Le nôtre."</div>
+              <div class="trend-meta">Pilier : Street Art · Format : Carousel photo</div>
+            </div>
+            <button class="btn btn-outline btn-sm" onclick="copyText(this)" data-text="Street Art + Tekno : deux cultures, un seul esprit. Le nôtre.">Copier</button>
+          </div>
+          <div class="trend-item" style="padding:12px; cursor:default;">
+            <div class="trend-content">
+              <div class="trend-title" style="font-size:13px;">"Psykotik Sound Kartel, c'est quoi ? Voilà en 7 slides."</div>
+              <div class="trend-meta">Pilier : Identité · Format : Carousel d'intro</div>
+            </div>
+            <button class="btn btn-outline btn-sm" onclick="copyText(this)" data-text="Psykotik Sound Kartel, c'est quoi ? Voilà en 7 slides.">Copier</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE : TENDANCES
+══════════════════════════════════════════ -->
+<div id="page-trends" class="page">
+  <div class="section-title">🔥 Veille Tendances DJ</div>
+  <div class="section-sub">Analyse quotidienne des formats qui performent en 2026</div>
+
+  <div class="grid-2">
+    <div>
+      <div class="card">
+        <div class="card-title">📈 Top formats Instagram Association / Rave — Avril 2026</div>
+        <div id="trends-list">
+          <div class="trend-item">
+            <div class="trend-rank">01</div>
+            <div class="trend-content">
+              <div class="trend-title">Teaser event — compte à rebours</div>
+              <div class="trend-meta">Flyer animé · Date · Ambiance sonore · 15–20 sec</div>
+            </div>
+            <div class="trend-score">+41% reach</div>
+          </div>
+          <div class="trend-item">
+            <div class="trend-rank">02</div>
+            <div class="trend-content">
+              <div class="trend-title">Reel ambiance live (foule + drop)</div>
+              <div class="trend-meta">Son brut du lieu · Coupe exacte au beat · sous-titres</div>
+            </div>
+            <div class="trend-score">+35% saves</div>
+          </div>
+          <div class="trend-item">
+            <div class="trend-rank">03</div>
+            <div class="trend-content">
+              <div class="trend-title">Carrousel "Qui est PSK ?"</div>
+              <div class="trend-meta">7 slides YUKOCODE · Identité collective · Save trigger</div>
+            </div>
+            <div class="trend-score">+28% follows</div>
+          </div>
+          <div class="trend-item">
+            <div class="trend-rank">04</div>
+            <div class="trend-content">
+              <div class="trend-title">Street Art Spotlight</div>
+              <div class="trend-meta">Photo/Reel d'un artiste · Contexte · Partages élevés</div>
+            </div>
+            <div class="trend-score">+31% shares</div>
+          </div>
+          <div class="trend-item">
+            <div class="trend-rank">05</div>
+            <div class="trend-content">
+              <div class="trend-title">Confession coulisses d'orga</div>
+              <div class="trend-meta">"Comment on prépare un event avec 0 budget" · Très partageable</div>
+            </div>
+            <div class="trend-score">+38% shares</div>
+          </div>
+          <div class="trend-item">
+            <div class="trend-rank">06</div>
+            <div class="trend-content">
+              <div class="trend-title">After-movie résumé event</div>
+              <div class="trend-meta">Montage 30–60 sec · Meilleurs moments · CTA prochain event</div>
+            </div>
+            <div class="trend-score">+24% engag.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="card">
+        <div class="card-title">🎯 Idées de sujets PSK — Cette semaine</div>
+        <div id="subject-ideas">
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <div style="background:#1a1a1a; border-radius:8px; padding:14px; border-left:3px solid var(--vert);">
+              <div style="font-size:13px; font-weight:600; color:var(--creme); margin-bottom:4px;">Comment PSK organise un event tekno avec 0 subvention</div>
+              <div style="font-size:11px; color:#666; font-family:'Space Mono',monospace;">Pilier Collectif · Score 22/23 · Audience : Tous</div>
+              <button class="btn btn-outline btn-sm" style="margin-top:8px;" onclick="useSubject(this)" data-subject="Comment PSK organise un event tekno avec 0 subvention">Utiliser ce sujet</button>
+            </div>
+            <div style="background:#1a1a1a; border-radius:8px; padding:14px; border-left:3px solid var(--rouge);">
+              <div style="font-size:13px; font-weight:600; color:var(--creme); margin-bottom:4px;">La scène underground à Chartres : ce que personne ne voit</div>
+              <div style="font-size:11px; color:#666; font-family:'Space Mono',monospace;">Pilier Local · Score 21/23 · Audience : Chartres + Ravers</div>
+              <button class="btn btn-outline btn-sm" style="margin-top:8px;" onclick="useSubject(this)" data-subject="la scène underground à Chartres : ce que personne ne voit">Utiliser ce sujet</button>
+            </div>
+            <div style="background:#1a1a1a; border-radius:8px; padding:14px; border-left:3px solid #FFA000;">
+              <div style="font-size:13px; font-weight:600; color:var(--creme); margin-bottom:4px;">Street Art + Techno : pourquoi les deux vont ensemble</div>
+              <div style="font-size:11px; color:#666; font-family:'Space Mono',monospace;">Pilier Street Art · Score 20/23 · Audience : Artistes + Ravers</div>
+              <button class="btn btn-outline btn-sm" style="margin-top:8px;" onclick="useSubject(this)" data-subject="Street Art + Techno : pourquoi les deux vont ensemble">Utiliser ce sujet</button>
+            </div>
+            <div style="background:#1a1a1a; border-radius:8px; padding:14px; border-left:3px solid #7090FF;">
+              <div style="font-size:13px; font-weight:600; color:var(--creme); margin-bottom:4px;">3 ans de PSK : ce qu'on a construit, ce qui reste à faire</div>
+              <div style="font-size:11px; color:#666; font-family:'Space Mono',monospace;">Pilier Collectif · Score 19/23 · Audience : Communauté PSK</div>
+              <button class="btn btn-outline btn-sm" style="margin-top:8px;" onclick="useSubject(this)" data-subject="3 ans de PSK : ce qu'on a construit, ce qui reste à faire">Utiliser ce sujet</button>
+            </div>
+            <div style="background:#1a1a1a; border-radius:8px; padding:14px; border-left:3px solid var(--vert);">
+              <div style="font-size:13px; font-weight:600; color:var(--creme); margin-bottom:4px;">Psytrance vs Tekno vs Techno : les vraies différences</div>
+              <div style="font-size:11px; color:#666; font-family:'Space Mono',monospace;">Pilier Éducation · Score 18/23 · Audience : Clubbers + Curieux</div>
+              <button class="btn btn-outline btn-sm" style="margin-top:8px;" onclick="useSubject(this)" data-subject="Psytrance vs Tekno vs Techno : les vraies différences">Utiliser ce sujet</button>
+            </div>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div style="text-align:center;">
+          <button class="btn btn-gris btn-sm" onclick="refreshSubjects()">🔄 Rafraîchir les sujets</button>
+        </div>
+      </div>
+
+      <!-- ALGORITHME TIPS -->
+      <div class="card">
+        <div class="card-title">🤖 Stratégie & conseils algorithme</div>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <div class="alert" style="background:rgba(24,119,242,0.1); border:1px solid rgba(24,119,242,0.3); color:#5b9cf6;">
+            <div class="alert-icon">🔵</div>
+            <div><strong>4 600 Facebook vs 341 Instagram.</strong> Priorité absolue : croiser les audiences. Mentionner Instagram dans chaque post Facebook, et Facebook dans chaque bio Instagram.</div>
+          </div>
+          <div class="alert alert-rouge">
+            <div class="alert-icon">🎯</div>
+            <div><strong>Le 23e anniversaire de PSK (2003→2026) est un contenu viral naturel.</strong> Un carrousel "l'histoire de PSK en 7 slides" peut déclencher des partages massifs de la communauté historique.</div>
+          </div>
+          <div class="alert alert-vert">
+            <div class="alert-icon">✅</div>
+            <div><strong>Les Reels = 35% d'engagement en plus.</strong> Pour chaque event, publier : teaser J-7 + story J-1 + reel ambiance J+1.</div>
+          </div>
+          <div class="alert alert-orange">
+            <div class="alert-icon">⚠️</div>
+            <div><strong>Qualité &gt; Quantité.</strong> L'algo est sélectif. 3 posts forts valent mieux que 7 moyens.</div>
+          </div>
+          <div class="alert alert-info">
+            <div class="alert-icon">💡</div>
+            <div><strong>Publie entre 18h et 21h.</strong> Réponds aux commentaires dans les 30 min qui suivent la publication.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE : CHARTRES ÉVÉNEMENT
+══════════════════════════════════════════ -->
+<div id="page-chartres" class="page">
+  <div class="section-title">🏛️ Déclarer un événement à Chartres</div>
+  <div class="section-sub">Guide et assistant pour organiser une manifestation sur la Ville de Chartres</div>
+
+  <div class="alert alert-info">
+    <div class="alert-icon">ℹ️</div>
+    <div>
+      <strong>Source officielle :</strong> Toute manifestation ou événement à Chartres nécessite une autorisation préalable de la Ville, qu'il s'agisse d'un événement associatif, culturel, sportif, commercial ou festif.
+      <a href="https://www.chartres.fr/organiser-manifestation-temporaire" target="_blank" style="color:var(--vert); text-decoration:none;"> → Voir la page officielle</a>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <!-- CALCULATEUR DE DÉLAIS -->
+    <div>
+      <div class="card">
+        <div class="card-title">⏱️ Calculateur de délais</div>
+        <div class="form-group">
+          <label>DATE PRÉVUE DE TON ÉVÉNEMENT</label>
+          <input class="input" type="date" id="event-date" oninput="calculateDeadlines()" />
+        </div>
+        <div class="form-group">
+          <label>TYPE DE MANIFESTATION</label>
+          <select class="select" id="event-type" onchange="calculateDeadlines()">
+            <option value="">-- Choisir --</option>
+            <option value="voie-publique-materiel">Voie publique AVEC prêt matériel (barnum, barrières, électricité...)</option>
+            <option value="voie-publique-sans">Voie publique SANS prêt matériel</option>
+            <option value="hotel-ville">Hôtel de Ville / Espace municipal</option>
+            <option value="terrasse">Terrasse d'établissement</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>VENTE D'ALCOOL ?</label>
+          <div class="pill-group" id="alcool-group">
+            <span class="pill" onclick="togglePill(this,'alcool-group'); calculateDeadlines()">Non</span>
+            <span class="pill" onclick="togglePill(this,'alcool-group'); calculateDeadlines()">Oui</span>
+          </div>
+        </div>
+
+        <!-- RÉSULTAT DÉLAIS -->
+        <div id="deadline-result"></div>
+      </div>
+
+      <!-- DOSSIERS À TÉLÉCHARGER -->
+      <div class="card">
+        <div class="card-title">📥 Dossiers officiels Chartres</div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <a href="https://www.chartres.fr/fileadmin/user_upload/domaine-public/demenagement-travaux/Dossier-demande-manifestation-temporaire-occupation-domaine-public.pdf"
+             target="_blank" class="btn btn-gris btn-full" style="justify-content:flex-start;">
+            📄 Dossier avec prêt matériel <span style="margin-left:auto; font-size:10px; color:#666;">311 Ko</span>
+          </a>
+          <a href="https://www.chartres.fr/fileadmin/user_upload/domaine-public/demenagement-travaux/dossier-manifestation-sans-pret-materiel-chartres.pdf"
+             target="_blank" class="btn btn-gris btn-full" style="justify-content:flex-start;">
+            📄 Dossier sans prêt matériel <span style="margin-left:auto; font-size:10px; color:#666;">PDF</span>
+          </a>
+          <a href="https://www.chartres.fr/fileadmin/user_upload/domaine-public/demenagement-travaux/Dossier-demande-manifestation-hotel-ville.pdf"
+             target="_blank" class="btn btn-gris btn-full" style="justify-content:flex-start;">
+            📄 Dossier Hôtel de Ville <span style="margin-left:auto; font-size:10px; color:#666;">PDF</span>
+          </a>
+          <a href="https://www.chartres.fr/fileadmin/user_upload/domaine-public/demenagement-travaux/arrete-autorisation-animation-musicale-domaine-public.pdf"
+             target="_blank" class="btn btn-gris btn-full" style="justify-content:flex-start;">
+            🎵 Arrêté animation musicale <span style="margin-left:auto; font-size:10px; color:#666;">PDF</span>
+          </a>
+          <a href="https://www.chartres.fr/fileadmin/user_upload/domaine-public/demenagement-travaux/2022-07-22-Domaine-public-Guide-utilisation-Dossier-autorisation-manifestation-temporaire.pdf"
+             target="_blank" class="btn btn-outline btn-full" style="justify-content:flex-start;">
+            📖 Guide d'utilisation officiel
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORMULAIRE PRÉ-REMPLI -->
+    <div>
+      <div class="card">
+        <div class="card-title">📝 Pré-remplissage de ta demande</div>
+        <div class="alert alert-orange">
+          <div class="alert-icon">⚠️</div>
+          <div>Prépare tes données ici, puis reporte-les dans le dossier PDF officiel à télécharger et à déposer en mairie.</div>
+        </div>
+
+        <div class="form-row">
+          <div>
+            <label>NOM DE L'ORGANISATEUR</label>
+            <input class="input" value="Philippe SK" id="org-nom" />
+          </div>
+          <div>
+            <label>PRÉNOM</label>
+            <input class="input" value="Philippe" id="org-prenom" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div>
+            <label>EMAIL</label>
+            <input class="input" type="email" id="org-email" placeholder="ton@email.fr" />
+          </div>
+          <div>
+            <label>TÉLÉPHONE</label>
+            <input class="input" type="tel" id="org-tel" placeholder="06 XX XX XX XX" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>INTITULÉ DE L'ÉVÉNEMENT</label>
+          <input class="input" id="evt-titre" placeholder="ex: Soirée DJ PSK — Electro/Tekno" />
+        </div>
+
+        <div class="form-row">
+          <div>
+            <label>DATE DE L'ÉVÉNEMENT</label>
+            <input class="input" type="date" id="evt-date" />
+          </div>
+          <div>
+            <label>HEURE DE DÉBUT</label>
+            <input class="input" type="time" id="evt-heure-debut" value="20:00" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div>
+            <label>HEURE DE FIN</label>
+            <input class="input" type="time" id="evt-heure-fin" value="02:00" />
+          </div>
+          <div>
+            <label>NOMBRE DE PERSONNES ATTENDUES</label>
+            <input class="input" type="number" id="evt-public" placeholder="ex: 200" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>LIEU PRÉCIS (adresse, place, voie)</label>
+          <input class="input" id="evt-lieu" placeholder="ex: Place des Épars, Chartres" />
+        </div>
+
+        <div class="form-group">
+          <label>DESCRIPTION DE L'ÉVÉNEMENT</label>
+          <textarea class="textarea" id="evt-desc" placeholder="Décris brièvement l'événement, le type de public, l'ambiance musicale..."></textarea>
+        </div>
+
+        <div class="form-row">
+          <div>
+            <label>MATÉRIEL DEMANDÉ À LA VILLE</label>
+            <select class="select" id="evt-materiel">
+              <option value="aucun">Aucun (apport perso)</option>
+              <option value="barnum">Barnum(s)</option>
+              <option value="barrieres">Barrières de sécurité</option>
+              <option value="electricite">Accès électricité</option>
+              <option value="complet">Barnum + Barrières + Électricité</option>
+            </select>
+          </div>
+          <div>
+            <label>VENTE D'ALCOOL</label>
+            <select class="select" id="evt-alcool">
+              <option value="non">Non</option>
+              <option value="oui-licence">Oui (j'ai déjà une licence IV)</option>
+              <option value="oui-demande">Oui (je dois faire une demande)</option>
+            </select>
+          </div>
+        </div>
+
+        <button class="btn btn-vert btn-full" onclick="generateSummary()" style="margin-top:8px;">
+          📋 Générer le récapitulatif
+        </button>
+      </div>
+
+      <!-- RÉCAPITULATIF -->
+      <div class="card" id="summary-card" style="display:none;">
+        <div class="card-title">📋 Récapitulatif de ta demande</div>
+        <div id="summary-content" class="generated-block"></div>
+        <div class="divider"></div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <button class="btn btn-outline btn-sm" onclick="copySummary()">📋 Copier le récapitulatif</button>
+          <a href="https://www.chartres.fr/organiser-manifestation-temporaire" target="_blank" class="btn btn-gris btn-sm">🌐 Site Chartres.fr</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INFOS PRATIQUES -->
+  <div class="card">
+    <div class="card-title">📌 Informations pratiques — Mairie de Chartres</div>
+    <div class="grid-3">
+      <div>
+        <h3>🏛️ Où déposer le dossier</h3>
+        <p style="font-size:13px; margin-top:8px;">Service Domaine Public<br>
+        <strong style="color:var(--creme);">Mairie de Chartres</strong><br>
+        Place des Épars · 28000 Chartres<br>
+        Lun–Ven : 8h30–12h00 / 13h30–17h30</p>
+      </div>
+      <div>
+        <h3>⏱️ Délais à respecter</h3>
+        <div style="margin-top:8px; display:flex; flex-direction:column; gap:6px;">
+          <div class="alert alert-rouge" style="margin:0; padding:8px 12px; font-size:12px;">
+            <div class="alert-icon">🔴</div>
+            <div><strong>3 mois</strong> avant si prêt de matériel</div>
+          </div>
+          <div class="alert alert-orange" style="margin:0; padding:8px 12px; font-size:12px;">
+            <div class="alert-icon">🟡</div>
+            <div><strong>1 mois</strong> avant sans prêt matériel</div>
+          </div>
+          <div class="alert alert-info" style="margin:0; padding:8px 12px; font-size:12px;">
+            <div class="alert-icon">🔵</div>
+            <div><strong>15 jours</strong> avant pour l'alcool</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h3>🎵 Spécifique animation musicale</h3>
+        <p style="font-size:13px; margin-top:8px;">Pour les événements avec animation sonore sur la voie publique, un arrêté spécifique encadre les horaires et niveaux sonores. Télécharge le document dédié :</p>
+        <a href="https://www.chartres.fr/fileadmin/user_upload/domaine-public/demenagement-travaux/arrete-autorisation-animation-musicale-domaine-public.pdf"
+           target="_blank" class="btn btn-outline btn-sm" style="margin-top:10px;">📄 Arrêté animation musicale</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SCRIPTS
+══════════════════════════════════════════ -->
+<script>
+// ─── Navigation ───
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  event.target.closest('.nav-tab').classList.add('active');
+}
+
+// ─── Pill toggle ───
+function togglePill(el, groupId) {
+  document.querySelectorAll('#'+groupId+' .pill, .pill-group[id="'+groupId+'"] .pill').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// Init pill groups
+document.querySelectorAll('.pill-group').forEach(group => {
+  group.querySelectorAll('.pill').forEach(pill => {
+    pill.addEventListener('click', function() {
+      group.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+});
+
+// ─── Hashtag tags ───
+document.querySelectorAll('#hashtag-list .tag').forEach(tag => {
+  tag.addEventListener('click', () => tag.classList.toggle('selected'));
+});
+
+// ─── Copy hashtags ───
+function copyHashtags() {
+  const selected = [...document.querySelectorAll('#hashtag-list .tag.selected')].map(t => t.textContent.trim()).join(' ');
+  navigator.clipboard.writeText(selected).then(() => showToast('Hashtags copiés !'));
+}
+
+// ─── Copy text ───
+function copyText(btn) {
+  const text = btn.dataset.text;
+  navigator.clipboard.writeText(text).then(() => showToast('Copié !'));
+}
+
+// ─── Toast ───
+function showToast(msg) {
+  const t = document.createElement('div');
+  t.style.cssText = 'position:fixed;bottom:24px;right:24px;background:var(--vert);color:var(--noir);padding:12px 20px;border-radius:8px;font-family:"Space Mono",monospace;font-size:12px;font-weight:700;z-index:999;animation:fadeIn .2s';
+  t.textContent = '✓ ' + msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 2000);
+}
+
+// ─── Content Generator ───
+const YUKOCODE_TEMPLATES = {
+  contrarian: {
+    msg0: (angle) => `Ce que personne ne te dit sur ${angle || "la scène tekno à Chartres"}`,
+    msg1: () => `Tu penses que la scène underground est morte en province.`,
+    msg2: () => `Faux. Elle s'est juste déplacée. Et elle résiste.`,
+    msg3: () => `Psykotik Sound Kartel est là depuis des années. Sans subvention. Sans grande salle. Avec la rage.`,
+    msg4: () => `L'énergie urbaine n'a pas besoin d'une grande ville pour exister.`,
+    msg5: () => `Sauvegarde ce post. Partage-le à ceux qui pensent que Chartres n'a pas de scène.`,
+    msg6: () => `INFOS`
+  },
+  confession: {
+    msg0: (angle) => `On a organisé ${angle || "notre premier event"} avec 0 budget.`,
+    msg1: () => `Pas de salle, pas de subvention, pas de réseau.`,
+    msg2: () => `Juste des gens qui voulaient faire quelque chose de vrai pour leur ville.`,
+    msg3: () => `On a monté PSK pour que la scène tekno & street art existe à Chartres.`,
+    msg4: () => `Aujourd'hui l'asso grandit. Mais l'esprit collectif reste le même.`,
+    msg5: () => `Si tu crois en la culture urbaine indépendante, save & partage.`,
+    msg6: () => `REJOINS`
+  },
+  secret: {
+    msg0: (angle) => `Ce qui fait vraiment vivre une scène underground comme ${angle || "PSK"}`,
+    msg1: () => `Ce n'est pas la musique seule.`,
+    msg2: () => `Ce n'est pas le flyer. Ni le lieu.`,
+    msg3: () => `C'est la communauté derrière. Les gens qui reviennent. Qui amènent leurs amis.`,
+    msg4: () => `PSK existe parce que vous êtes là. Pas l'inverse.`,
+    msg5: () => `Sauvegarde ce post. Montre-le à quelqu'un qui devrait nous rejoindre.`,
+    msg6: () => `REJOINS`
+  },
+  'before-after': {
+    msg0: (angle) => `${angle || "PSK"} : comment on est passé de rien à une vraie scène`,
+    msg1: () => `2022 : première soirée. Quelques amis. Un système son. Une envie.`,
+    msg2: () => `Pas de réseau. Pas d'argent. Juste l'énergie.`,
+    msg3: () => `2026 : une association, une résidence, une communauté.`,
+    msg4: () => `Tekno + Street Art + Social. L'énergie urbaine engagée. Pour de vrai.`,
+    msg5: () => `Partage si tu fais partie de cette aventure.`,
+    msg6: () => `INFOS`
+  },
+  erreur: {
+    msg0: (angle) => `L'erreur qui tue une scène underground (${angle || "on l'a vu venir"})`,
+    msg1: () => `Se refermer. Jouer pour les mêmes 50 personnes.`,
+    msg2: () => `Oublier que la culture s'élargit ou elle meurt.`,
+    msg3: () => `PSK mêle Techno, Street Art et engagement social pour une raison.`,
+    msg4: () => `Une scène vivante touche tout le monde. Pas juste les connaisseurs.`,
+    msg5: () => `Save si tu crois en une culture ouverte et populaire.`,
+    msg6: () => `ÉVÉNEMENTS`
+  },
+  liste: {
+    msg0: (angle) => `3 raisons de rejoindre ${angle || "le collectif PSK Chartres"}`,
+    msg1: () => `1. Des événements techno/street art ancrés dans la ville.`,
+    msg2: () => `2. Un collectif soudé qui agit plutôt que de se plaindre.`,
+    msg3: () => `3. Une scène qui grandit — et t'appartient autant qu'à nous.`,
+    msg4: () => `Psykotik Sound Kartel, c'est toi aussi si tu veux.`,
+    msg5: () => `Save & partage à quelqu'un qui cherche sa tribu.`,
+    msg6: () => `REJOINS`
+  }
+};
+
+const SLIDE_COLORS = {
+  msg0: '#3a2010',
+  msg1: '#080808',
+  msg2: '#080808',
+  msg3: '#080808',
+  msg4: '#080808',
+  msg5: '#080808',
+  msg6: '#C8FF00'
+};
+const SLIDE_TEXT_COLORS = {
+  msg0: '#F5F0EB',
+  msg1: '#F5F0EB',
+  msg2: '#C8FF00',
+  msg3: '#F5F0EB',
+  msg4: '#C8FF00',
+  msg5: '#F5F0EB',
+  msg6: '#080808'
+};
+const SLIDE_LABELS = ['MSG0 — HOOK', 'MSG1 — PROBLÈME', 'MSG2 — TENSION', 'MSG3 — SOLUTION', 'MSG4 — PREUVE', 'MSG5 — SAVE TRIGGER', 'MSG6 — CTA DM'];
+
+function generateContent() {
+  const psycho = document.getElementById('psycho-select').value;
+  const angle = document.getElementById('angle-input').value;
+  const template = YUKOCODE_TEMPLATES[psycho];
+  if (!template) return;
+
+  const slides = [
+    template.msg0(angle), template.msg1(angle), template.msg2(angle),
+    template.msg3(angle), template.msg4(angle), template.msg5(angle),
+    template.msg6(angle)
+  ];
+
+  const msgKeys = ['msg0','msg1','msg2','msg3','msg4','msg5','msg6'];
+
+  let html = '<div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">';
+  slides.forEach((text, i) => {
+    const bg = SLIDE_COLORS[msgKeys[i]];
+    const color = SLIDE_TEXT_COLORS[msgKeys[i]];
+    const topBar = i === 6 ? 'none' : 'before';
+    html += `
+      <div style="background:${bg}; border-radius:10px; aspect-ratio:4/5; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:20px; text-align:center; position:relative; overflow:hidden; border:1px solid #333;">
+        <div style="position:absolute; top:0; left:0; right:0; height:5px; background:${i===6?'#080808':'var(--vert)'}"></div>
+        <div style="position:absolute; top:10px; right:10px; font-family:'Space Mono',monospace; font-size:9px; color:#555;">${i+1}/7</div>
+        <div style="font-size:9px; color:${i===6?'#333':'#555'}; font-family:'Space Mono',monospace; margin-bottom:10px; text-transform:uppercase; letter-spacing:1px;">${SLIDE_LABELS[i]}</div>
+        <div style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:clamp(16px,2vw,22px); color:${color}; line-height:.92; text-transform:uppercase; word-break:keep-all;">${text}</div>
+      </div>`;
+  });
+  html += '</div>';
+
+  document.getElementById('slides-container').innerHTML = html;
+
+  // Légende
+  const pilier = document.querySelector('#pilier-group .pill.active')?.dataset.val || 'preuve';
+  const pilierLabel = {preuve:'Preuve live',coulisses:'Coulisses',education:'Éducation',temoignage:'Témoignage',local:'Local Chartres'}[pilier];
+  const legende = generateLegende(psycho, angle, pilierLabel, slides[0]);
+  document.getElementById('legende-output').innerHTML = `
+    <button class="copy-btn" onclick="copyLegende()">Copier</button>
+    <div class="line slide-label">// LÉGENDE INSTAGRAM</div>
+    <div class="line hook">${slides[0]}</div>
+    <div class="line">↓</div>
+    <div class="line">${legende}</div>
+    <div class="line">—</div>
+    <div class="line">📌 Sauvegarde ce post.</div>
+    <div class="line">👇 Commente ${slides[6]} si tu veux en savoir plus.</div>
+    <div class="line" style="color:#555; margin-top:8px;"># hashtags : voir la liste sélectionnée ci-dessous</div>
+  `;
+  document.getElementById('legende-card').style.display = 'block';
+}
+
+function generateLegende(psycho, angle, pilier, hook) {
+  const map = {
+    contrarian: `La scène underground n'est pas morte.\n\nElle est juste là où on ne l'attend pas. À Chartres. Dans le 28.\n\nPsykotik Sound Kartel existe depuis plusieurs années pour prouver exactement ça.\n\nTechno · Street Art · Engagement. L'énergie urbaine engagée.\n\n→ Tous nos événements en bio : linktr.ee/psk.crew`,
+    confession: `On ne l'avait pas prévu comme ça.\n\nOn voulait juste créer quelque chose de vrai pour notre ville. Une scène qui nous ressemble.\n\nPSK a grandi parce que des gens comme toi ont cru au projet.\n\nLes prochains événements arrivent. Reste connecté.\n\n→ linktr.ee/psk.crew`,
+    secret: `Ce que les grandes salles ne te donnent pas :\n\nUne communauté. Des gens qui se connaissent. Qui reviennent pas pour l'affiche mais pour l'esprit.\n\nC'est ce qu'on construit à PSK, événement après événement.\n\nChartres & alentours. Underground. Engagé.\n\n→ linktr.ee/psk.crew`,
+    'before-after': `Quelques années. Des dizaines de soirées. Une communauté.\n\nPSK a commencé avec rien et une idée claire : Chartres mérite sa scène tekno et street art.\n\nOn y est. Et on continue.\n\n🟢 Psykotik Sound Kartel — L'énergie urbaine engagée.\n\n→ linktr.ee/psk.crew`,
+    erreur: `Une scène qui se referme finit par mourir.\n\nC'est pour ça que PSK mélange Techno, Street Art et engagement social.\n\nPour que la culture underground chartraine soit ouverte, vivante, diverse.\n\nProchains événements → linktr.ee/psk.crew`,
+    liste: `Tu cherches ta tribu à Chartres ?\n\nPSK c'est Techno · Street Art · Social. Un collectif qui agit.\n\nOn organise, on crée, on résiste. Avec l'énergie urbaine comme carburant.\n\n📍 Chartres & alentours\n→ Rejoins-nous : linktr.ee/psk.crew`
+  };
+  return map[psycho] || map.contrarian;
+}
+
+function copyLegende() {
+  const text = document.getElementById('legende-output').innerText.replace('// LÉGENDE INSTAGRAM\n','');
+  navigator.clipboard.writeText(text).then(() => showToast('Légende copiée !'));
+}
+
+// ─── Calendrier ───
+function buildCalendar() {
+  const grid = document.getElementById('cal-grid');
+  const year = 2026, month = 4; // Mai = index 4
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month+1, 0).getDate();
+  const today = new Date();
+
+  // Événements PSK réels (mai 2026) + contenus planifiés
+  const events = {
+    1: [{label:'Story ouverture mai', type:'vert'}],
+    4: [{label:'Reel teaser Nopal 13', type:'vert'}],
+    6: [{label:'Carrousel "PSK c\'est quoi"', type:'vert'}],
+    8: [{label:'Compte à rebours -5j', type:'vert'}],
+    10: [{label:'Teaser artistes Nopal', type:'vert'}],
+    12: [{label:'Story "demain !"', type:'vert'}],
+    13: [{label:'🎪 NOPAL DJ SET 16h', type:'rouge'}],
+    14: [{label:'Reel after / ambiance', type:'vert'}],
+    15: [{label:'Teaser Guinguette 17', type:'vert'}],
+    16: [{label:'Story "demain Guinguette"', type:'vert'}],
+    17: [{label:'🌿 GUINGUETTE ELECTRO 14h', type:'rouge'}],
+    18: [{label:'Reel after Guinguette', type:'vert'}],
+    21: [{label:'Carousel Street Art', type:'vert'}],
+    25: [{label:'Reel histo PSK 2003', type:'vert'}],
+    28: [{label:'Story prochain event', type:'vert'}],
+    31: [{label:'Récap mai + teaser été', type:'vert'}]
+  };
+
+  // Décalage : lundi = 0
+  let startOffset = (firstDay + 6) % 7;
+  let html = '';
+  for (let i = 0; i < startOffset; i++) html += '<div></div>';
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const isToday = today.getFullYear() === year && today.getMonth() === month && today.getDate() === d;
+    const evts = events[d] || [];
+    html += `<div class="cal-day ${evts.length ? 'has-event' : ''} ${isToday ? 'today' : ''}">
+      <div class="cal-day-num">${d}</div>
+      ${evts.map(e => `<div class="cal-event ${e.type === 'rouge' ? 'rouge' : ''}">${e.label}</div>`).join('')}
+    </div>`;
+  }
+  grid.innerHTML = html;
+  document.getElementById('stat-posts').textContent = Object.values(events).flat().length;
+}
+buildCalendar();
+
+// ─── Tendances refresh ───
+const MORE_SUBJECTS = [
+  {title:"Ce qui se passe vraiment dans les coulisses d'un event PSK", score:"21/23", pilier:"Collectif", audience:"Tous"},
+  {title:"Pourquoi on fait ça sans se faire payer (et on le refera)", score:"22/23", pilier:"Engagement", audience:"Tous"},
+  {title:"5 artistes street art de la scène chartraine à suivre", score:"19/23", pilier:"Street Art", audience:"Chartres"},
+  {title:"Une nuit PSK : ce que les photos ne montrent pas", score:"20/23", pilier:"Scène Live", audience:"Ravers"},
+  {title:"Comment rejoindre PSK et participer aux prochains events", score:"18/23", pilier:"Collectif", audience:"Tous"},
+];
+let subjectIdx = 0;
+function refreshSubjects() {
+  const el = document.querySelector('#subject-ideas > div');
+  const borders = ['var(--vert)','var(--rouge)','#FFA000','#7090FF','#aaa'];
+  let html = '';
+  for (let i = 0; i < 5; i++) {
+    const s = MORE_SUBJECTS[(subjectIdx + i) % MORE_SUBJECTS.length];
+    html += `<div style="background:#1a1a1a; border-radius:8px; padding:14px; border-left:3px solid ${borders[i]};">
+      <div style="font-size:13px; font-weight:600; color:var(--creme); margin-bottom:4px;">${s.title}</div>
+      <div style="font-size:11px; color:#666; font-family:'Space Mono',monospace;">Pilier ${s.pilier} · Score ${s.score} · Audience : ${s.audience}</div>
+      <button class="btn btn-outline btn-sm" style="margin-top:8px;" onclick="useSubject(this)" data-subject="${s.title}">Utiliser ce sujet</button>
+    </div>`;
+  }
+  el.innerHTML = html;
+  subjectIdx = (subjectIdx + 5) % MORE_SUBJECTS.length;
+  showToast('Sujets rafraîchis !');
+}
+
+function useSubject(btn) {
+  document.getElementById('angle-input').value = btn.dataset.subject;
+  showPage('content');
+  // Simulate click on content tab
+  document.querySelectorAll('.nav-tab')[1].click();
+}
+
+// ─── Calculateur délais Chartres ───
+function calculateDeadlines() {
+  const dateVal = document.getElementById('event-date').value;
+  const type = document.getElementById('event-type').value;
+  if (!dateVal || !type) {
+    document.getElementById('deadline-result').innerHTML = '';
+    return;
+  }
+
+  const eventDate = new Date(dateVal);
+  const today = new Date();
+  const daysUntil = Math.floor((eventDate - today) / (1000*60*60*24));
+
+  let deadline, label, color;
+  if (type === 'voie-publique-materiel') {
+    deadline = 90; label = '3 mois'; color = 'rouge';
+  } else if (type === 'voie-publique-sans') {
+    deadline = 30; label = '1 mois'; color = 'orange';
+  } else if (type === 'hotel-ville') {
+    deadline = 30; label = '1 mois'; color = 'orange';
+  } else {
+    deadline = 30; label = '1 mois'; color = 'orange';
+  }
+
+  const deadlineDate = new Date(eventDate);
+  deadlineDate.setDate(deadlineDate.getDate() - deadline);
+  const daysToDeadline = Math.floor((deadlineDate - today) / (1000*60*60*24));
+
+  const isUrgent = daysToDeadline < 14;
+  const isMissed = daysToDeadline < 0;
+
+  const alcoolActive = document.querySelector('#alcool-group .pill.active')?.textContent.trim() === 'Oui';
+  let alcoolHtml = '';
+  if (alcoolActive) {
+    const alcoolDeadline = new Date(eventDate);
+    alcoolDeadline.setDate(alcoolDeadline.getDate() - 15);
+    const daysToAlcool = Math.floor((alcoolDeadline - today) / (1000*60*60*24));
+    alcoolHtml = `
+      <div style="margin-top:10px; padding:10px 14px; background:rgba(100,150,255,0.1); border:1px solid rgba(100,150,255,0.3); border-radius:8px; font-size:12px; color:#7090FF;">
+        🍺 <strong>Autorisation débit d'alcool</strong> — à déposer avant le <strong>${alcoolDeadline.toLocaleDateString('fr-FR')}</strong>
+        ${daysToAlcool < 0 ? ' ⚠️ DÉLAI DÉPASSÉ' : ` (dans ${daysToAlcool} jours)`}
+        <br><a href="https://www.chartres.fr/demarches-et-services" target="_blank" style="color:#7090FF;">→ Mes Démarches Chartres</a>
+      </div>`;
+  }
+
+  const statusColor = isMissed ? 'var(--rouge)' : isUrgent ? '#FFA000' : 'var(--vert)';
+  const statusIcon = isMissed ? '🔴' : isUrgent ? '🟡' : '🟢';
+  const statusText = isMissed ? 'DÉLAI DÉPASSÉ — Contacte la mairie directement' : isUrgent ? 'URGENT — Dépose le dossier cette semaine' : `OK — Il te reste ${daysToDeadline} jours`;
+
+  document.getElementById('deadline-result').innerHTML = `
+    <div class="deadline-box ${isUrgent || isMissed ? 'urgent' : ''}">
+      <div class="deadline-title">${statusIcon} ${statusText}</div>
+      <div style="font-size:13px; color:#bbb; margin-bottom:10px;">
+        Ton événement : <strong style="color:var(--creme);">${eventDate.toLocaleDateString('fr-FR')}</strong>
+        · dans <strong style="color:var(--creme);">${daysUntil} jours</strong>
+      </div>
+      <div style="font-size:13px; color:#bbb;">
+        📅 Date limite de dépôt (${label} avant) :
+        <strong style="color:${statusColor};">${deadlineDate.toLocaleDateString('fr-FR')}</strong>
+      </div>
+      ${alcoolHtml}
+      <div style="margin-top:14px;">
+        <a href="${type === 'voie-publique-materiel'
+          ? 'https://www.chartres.fr/fileadmin/user_upload/domaine-public/demenagement-travaux/Dossier-demande-manifestation-temporaire-occupation-domaine-public.pdf'
+          : type === 'hotel-ville'
+          ? 'https://www.chartres.fr/fileadmin/user_upload/domaine-public/demenagement-travaux/Dossier-demande-manifestation-hotel-ville.pdf'
+          : 'https://www.chartres.fr/fileadmin/user_upload/domaine-public/demenagement-travaux/dossier-manifestation-sans-pret-materiel-chartres.pdf'
+        }" target="_blank" class="btn btn-vert btn-sm">📥 Télécharger le bon dossier</a>
+      </div>
+    </div>`;
+}
+
+// ─── Récapitulatif demande ───
+function generateSummary() {
+  const nom = document.getElementById('org-nom').value;
+  const email = document.getElementById('org-email').value;
+  const tel = document.getElementById('org-tel').value;
+  const titre = document.getElementById('evt-titre').value || 'À définir';
+  const date = document.getElementById('evt-date').value;
+  const heureD = document.getElementById('evt-heure-debut').value;
+  const heureF = document.getElementById('evt-heure-fin').value;
+  const public_ = document.getElementById('evt-public').value;
+  const lieu = document.getElementById('evt-lieu').value;
+  const desc = document.getElementById('evt-desc').value;
+  const materiel = document.getElementById('evt-materiel').value;
+  const alcool = document.getElementById('evt-alcool').value;
+
+  const dateStr = date ? new Date(date).toLocaleDateString('fr-FR') : 'À définir';
+  const materielLabels = {aucun:'Aucun', barnum:'Barnum(s)', barrieres:'Barrières', electricite:'Électricité', complet:'Complet (barnum + barrières + électricité)'};
+  const alcoolLabels = {'non':'Non', 'oui-licence':'Oui (licence IV existante)', 'oui-demande':'Oui (demande à déposer séparément)'};
+
+  document.getElementById('summary-content').innerHTML = `
+    <div class="line slide-label">// RÉCAPITULATIF DEMANDE — MAIRIE DE CHARTRES</div>
+    <div class="line"><span style="color:#666;">ORGANISATEUR :</span> ${nom} — ${email} — ${tel}</div>
+    <div class="line"><span style="color:#666;">ÉVÉNEMENT :</span> <span class="hook">${titre}</span></div>
+    <div class="line"><span style="color:#666;">DATE :</span> ${dateStr} · ${heureD} → ${heureF}</div>
+    <div class="line"><span style="color:#666;">LIEU :</span> ${lieu || 'À préciser'}</div>
+    <div class="line"><span style="color:#666;">PUBLIC ATTENDU :</span> ${public_ || 'À préciser'} personnes</div>
+    <div class="line"><span style="color:#666;">MATÉRIEL DEMANDÉ :</span> ${materielLabels[materiel] || materiel}</div>
+    <div class="line"><span style="color:#666;">VENTE ALCOOL :</span> ${alcoolLabels[alcool] || alcool}</div>
+    <div class="line"><span style="color:#666;">DESCRIPTION :</span> ${desc || 'À compléter'}</div>
+    <div class="line" style="margin-top:12px; color:#555;">— À reporter dans le dossier PDF officiel et déposer en Mairie de Chartres —</div>
+  `;
+  document.getElementById('summary-card').style.display = 'block';
+  showToast('Récapitulatif généré !');
+}
+
+function copySummary() {
+  const text = document.getElementById('summary-content').innerText;
+  navigator.clipboard.writeText(text).then(() => showToast('Récapitulatif copié !'));
+}
+
+// ─── Add calendar event ───
+function addEvent() {
+  showToast('Fonction à venir — Utilise le générateur de contenu pour créer ton post');
+}
+
+// ─── Sync event date between sections ───
+document.getElementById('evt-date').addEventListener('change', function() {
+  document.getElementById('event-date').value = this.value;
+  calculateDeadlines();
+});
+</script>
+</body>
+</html>
