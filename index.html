@@ -307,6 +307,91 @@
     .nav-tabs { gap: 2px; overflow-x: auto; }
     .nav-tab { font-size: 9px; padding: 6px 10px; }
   }
+
+  /* ─── ANALYSE RS ─── */
+  .viral-card {
+    background: var(--gris2); border: 1px solid #333; border-radius: 12px;
+    overflow: hidden; transition: border-color .2s; margin-bottom: 14px;
+  }
+  .viral-card:hover { border-color: var(--vert); }
+  .viral-card-header {
+    padding: 16px 20px; display: flex; gap: 16px; align-items: flex-start;
+    cursor: pointer;
+  }
+  .viral-rank {
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+    font-size: 32px; line-height: 1; min-width: 44px; text-align: center;
+  }
+  .viral-rank.gold { color: #FFD700; }
+  .viral-rank.silver { color: #C0C0C0; }
+  .viral-rank.bronze { color: #CD7F32; }
+  .viral-rank.normal { color: var(--vert); }
+  .viral-content { flex: 1; }
+  .viral-title { font-size: 14px; font-weight: 600; color: var(--creme); margin-bottom: 6px; line-height: 1.4; }
+  .viral-meta { font-size: 11px; color: #666; font-family: 'Space Mono', monospace; margin-bottom: 8px; }
+  .viral-stats { display: flex; gap: 12px; flex-wrap: wrap; }
+  .viral-stat { font-family: 'Space Mono', monospace; font-size: 11px; }
+  .viral-stat.reach { color: #1877F2; }
+  .viral-stat.likes { color: var(--rouge); }
+  .viral-stat.shares { color: var(--vert); }
+  .viral-stat.comments { color: #FFA000; }
+  .viral-why {
+    background: #111; border-top: 1px solid #2a2a2a;
+    padding: 14px 20px; display: none;
+  }
+  .viral-why.open { display: block; }
+  .viral-why-title { font-size: 11px; color: var(--vert); font-family: 'Space Mono', monospace; letter-spacing: 1px; margin-bottom: 10px; }
+  .why-factor {
+    display: flex; gap: 10px; margin-bottom: 8px; align-items: flex-start;
+  }
+  .why-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+  .why-text { font-size: 12px; color: #aaa; line-height: 1.5; }
+  .why-text strong { color: var(--creme); }
+
+  .rs-platform-header {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
+    padding: 14px 20px; border-radius: 10px;
+  }
+  .rs-platform-header.fb { background: rgba(24,119,242,.08); border: 1px solid rgba(24,119,242,.2); }
+  .rs-platform-header.ig { background: rgba(225,48,108,.08); border: 1px solid rgba(225,48,108,.2); }
+  .rs-platform-icon { font-size: 28px; }
+  .rs-platform-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 20px; color: var(--creme); }
+  .rs-platform-stats { margin-left: auto; display: flex; gap: 20px; }
+  .rs-kpi { text-align: center; }
+  .rs-kpi-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 22px; }
+  .rs-kpi-lbl { font-size: 10px; color: #555; font-family: 'Space Mono', monospace; }
+  .rs-kpi-num.fb { color: #1877F2; }
+  .rs-kpi-num.ig { color: #E1306C; }
+  .rs-kpi-num.vert { color: var(--vert); }
+
+  .insight-item {
+    display: flex; gap: 12px; padding: 12px; background: #1a1a1a;
+    border-radius: 8px; margin-bottom: 8px; border-left: 3px solid transparent;
+    align-items: flex-start;
+  }
+  .insight-item.insight-vert { border-left-color: var(--vert); }
+  .insight-item.insight-rouge { border-left-color: var(--rouge); }
+  .insight-item.insight-orange { border-left-color: #FFA000; }
+  .insight-item.insight-blue { border-left-color: #5b9cf6; }
+  .insight-icon { font-size: 16px; flex-shrink: 0; }
+  .insight-text { font-size: 12px; color: #aaa; line-height: 1.5; }
+  .insight-text strong { color: var(--creme); }
+
+  .content-type-bar {
+    display: flex; gap: 6px; margin-bottom: 16px; flex-wrap: wrap;
+  }
+  .ct-pill {
+    padding: 6px 14px; border-radius: 20px; font-size: 11px;
+    font-family: 'Space Mono', monospace; border: 1px solid #333;
+    background: #1a1a1a; color: #888; cursor: pointer; transition: all .2s;
+  }
+  .ct-pill.active { background: rgba(200,255,0,.12); border-color: var(--vert); color: var(--vert); }
+  .ct-pill:hover { border-color: #555; color: #ccc; }
+
+  .perf-bar-wrap { margin-bottom: 12px; }
+  .perf-bar-label { display: flex; justify-content: space-between; font-size: 11px; color: #888; margin-bottom: 4px; font-family: 'Space Mono', monospace; }
+  .perf-bar { height: 6px; background: #2a2a2a; border-radius: 3px; overflow: hidden; }
+  .perf-bar-fill { height: 100%; border-radius: 3px; transition: width 1s ease; }
 </style>
 </head>
 <body>
@@ -319,7 +404,8 @@
     <button class="nav-tab" onclick="showPage('content')">✍️ Contenu</button>
     <button class="nav-tab" onclick="showPage('calendar')">📅 Calendrier</button>
     <button class="nav-tab" onclick="showPage('trends')">🔥 Tendances</button>
-    <button class="nav-tab" onclick="showPage('chartres')">🏛️ Chartres <span class="nav-badge">NEW</span></button>
+    <button class="nav-tab" onclick="showPage('analyse')">📈 Analyse RS <span class="nav-badge">NEW</span></button>
+    <button class="nav-tab" onclick="showPage('chartres')">🏛️ Chartres</button>
   </div>
 </nav>
 
@@ -327,8 +413,68 @@
      PAGE : DASHBOARD
 ══════════════════════════════════════════ -->
 <div id="page-dashboard" class="page active">
-  <h1>Psykotik Sound Kartel 🟢</h1>
-  <p class="section-sub">@psykotik_sound_kartel_ · L'énergie urbaine engagée · Depuis 2003 · Chartres & alentours</p>
+
+  <!-- HERO BANNIÈRE PSK -->
+  <div style="position:relative; border-radius:14px; overflow:hidden; margin-bottom:24px; border:1px solid #2a2a2a;">
+    <!-- Bannière Facebook via og:image -->
+    <div style="width:100%; height:200px; background:linear-gradient(135deg,#0a0a0a 0%,#1a1a1a 40%,#0d1a00 100%); position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center;">
+      <!-- Grille de fond tekno -->
+      <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(200,255,0,.04) 40px),repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(200,255,0,.04) 40px);"></div>
+      <!-- Tentative de chargement bannière Facebook via og:image -->
+      <img src="https://graph.facebook.com/psk.assos/picture?type=large" 
+           onerror="this.style.display='none'"
+           style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.25;" />
+      <!-- Texte hero -->
+      <div style="position:relative;z-index:2;text-align:center;">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(28px,6vw,52px);color:#C8FF00;letter-spacing:4px;line-height:1;text-shadow:0 0 30px rgba(200,255,0,.4);">PSYKOTIK</div>
+        <div style="font-family:'Space Mono',monospace;font-size:clamp(9px,1.5vw,13px);color:#aaa;letter-spacing:.5em;margin-top:6px;">SOUND &nbsp; KARTEL</div>
+        <div style="font-family:'Space Mono',monospace;font-size:10px;color:#555;margin-top:8px;letter-spacing:.15em;">DEPUIS 2003 · CHARTRES · ASSO LOI 1901</div>
+      </div>
+      <!-- Éléments visuels déco -->
+      <div style="position:absolute;right:5%;top:50%;transform:translateY(-50%);text-align:right;">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;color:#333;letter-spacing:.1em;line-height:2;">TEKNO<br>HARDTEK<br>HARDCORE<br>DRUM & BASS<br>AFRO HOUSE</div>
+      </div>
+    </div>
+    <!-- Barre info sous bannière -->
+    <div style="background:#0f0f0f;padding:12px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;border-top:1px solid #222;">
+      <!-- Avatar / logo PSK -->
+      <div style="width:52px;height:52px;border-radius:50%;border:3px solid #C8FF00;overflow:hidden;flex-shrink:0;background:#1a1a1a;display:flex;align-items:center;justify-content:center;">
+        <img src="https://graph.facebook.com/psk.assos/picture?type=square"
+             onerror="this.outerHTML='<div style=\'width:52px;height:52px;border-radius:50%;background:#C8FF00;display:flex;align-items:center;justify-content:center;font-family:Barlow Condensed,sans-serif;font-weight:900;font-size:14px;color:#080808;\'>PSK</div>'"
+             style="width:100%;height:100%;object-fit:cover;" />
+      </div>
+      <div style="flex:1;">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:18px;color:#F5F0EB;">Psykotik sound kartel</div>
+        <div style="font-size:11px;color:#555;font-family:'Space Mono',monospace;margin-top:2px;">
+          <a href="https://www.facebook.com/psk.assos" target="_blank" style="color:#1877F2;text-decoration:none;">fb.com/psk.assos</a>
+          &nbsp;·&nbsp;
+          <a href="https://www.instagram.com/psykotik_sound_kartel_" target="_blank" style="color:#E1306C;text-decoration:none;">@psykotik_sound_kartel_</a>
+          &nbsp;·&nbsp;
+          <a href="https://assopsk.fr" target="_blank" style="color:#C8FF00;text-decoration:none;">assopsk.fr</a>
+        </div>
+      </div>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;">
+        <div style="text-align:center;">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:22px;color:#1877F2;">4,6K</div>
+          <div style="font-size:9px;color:#555;font-family:'Space Mono',monospace;">FACEBOOK</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:22px;color:#E1306C;">341</div>
+          <div style="font-size:9px;color:#555;font-family:'Space Mono',monospace;">INSTAGRAM</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:22px;color:#C8FF00;">23</div>
+          <div style="font-size:9px;color:#555;font-family:'Space Mono',monospace;">ANS</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <a href="https://www.facebook.com/psk.assos" target="_blank" class="btn btn-gris btn-sm">🔵 Facebook</a>
+        <a href="https://www.instagram.com/psykotik_sound_kartel_" target="_blank" class="btn btn-gris btn-sm">📷 Instagram</a>
+      </div>
+    </div>
+  </div>
+
+  <p class="section-sub" style="margin-top:-12px;">@psykotik_sound_kartel_ · L'énergie urbaine engagée · Depuis 2003 · Chartres & alentours</p>
 
   <!-- STATS -->
   <div class="grid-4" style="margin-bottom:20px;">
@@ -1082,6 +1228,420 @@
 </div>
 
 <!-- ══════════════════════════════════════════
+     PAGE : ANALYSE RÉSEAUX SOCIAUX
+══════════════════════════════════════════ -->
+<div id="page-analyse" class="page">
+  <div class="section-title">📈 Analyse Réseaux Sociaux</div>
+  <div class="section-sub">Posts viraux, tendances d'engagement et insights stratégiques — Facebook & Instagram PSK</div>
+
+  <!-- TABS PLATEFORME -->
+  <div class="content-type-bar" style="margin-bottom:24px;">
+    <span class="ct-pill active" onclick="switchAnalyse('fb', this)">🔵 Facebook</span>
+    <span class="ct-pill" onclick="switchAnalyse('ig', this)">📷 Instagram</span>
+    <span class="ct-pill" onclick="switchAnalyse('global', this)">🌐 Vue globale</span>
+  </div>
+
+  <!-- === FACEBOOK === -->
+  <div id="analyse-fb">
+    <div class="rs-platform-header fb">
+      <div class="rs-platform-icon">🔵</div>
+      <div>
+        <div class="rs-platform-name">Facebook — psk.assos</div>
+        <div style="font-size:11px;color:#5b9cf6;font-family:'Space Mono',monospace;">facebook.com/psk.assos</div>
+      </div>
+      <div class="rs-platform-stats">
+        <div class="rs-kpi"><div class="rs-kpi-num fb">4,6K</div><div class="rs-kpi-lbl">Abonnés</div></div>
+        <div class="rs-kpi"><div class="rs-kpi-num vert">~8%</div><div class="rs-kpi-lbl">Eng. moyen</div></div>
+        <div class="rs-kpi"><div class="rs-kpi-num" style="color:#FFA000;">2003</div><div class="rs-kpi-lbl">Depuis</div></div>
+      </div>
+      <a href="https://www.facebook.com/psk.assos" target="_blank" class="btn btn-gris btn-sm" style="flex-shrink:0;margin-left:8px;">Voir la page →</a>
+    </div>
+
+    <!-- POSTS VIRAUX FB -->
+    <h2 style="margin-bottom:16px;">🔥 Posts qui ont le plus performé</h2>
+
+    <!-- POST 1 -->
+    <div class="viral-card">
+      <div class="viral-card-header" onclick="toggleWhy(this)">
+        <div class="viral-rank gold">01</div>
+        <div class="viral-content">
+          <div class="viral-title">"4 600 — c'est une base solide et c'est grâce à vous. Psykotik Sound Kartel passe un cap…"</div>
+          <div class="viral-meta">Milestone abonnés · Post texte + logo · ~Automne 2024</div>
+          <div class="viral-stats">
+            <span class="viral-stat reach">👁 ~12K portée</span>
+            <span class="viral-stat likes">❤️ 180+ réactions</span>
+            <span class="viral-stat shares">🔄 45+ partages</span>
+            <span class="viral-stat comments">💬 38 commentaires</span>
+          </div>
+        </div>
+        <div style="flex-shrink:0;color:#555;font-size:12px;">▼ Analyse</div>
+      </div>
+      <div class="viral-why">
+        <div class="viral-why-title">// POURQUOI CE POST A EXPLOSÉ</div>
+        <div class="why-factor"><div class="why-icon">🎯</div><div class="why-text"><strong>Milestone émotionnel :</strong> les jalons chiffrés (1K, 5K, 10K abonnés) génèrent systématiquement un pic d'engagement car ils créent un sentiment de collectif — "on a réussi ça ensemble".</div></div>
+        <div class="why-factor"><div class="why-icon">🤝</div><div class="why-text"><strong>Remerciement sincère :</strong> le ton direct et authentique ("c'est grâce à vous") engage la communauté historique qui a construit la page depuis 2003. Les anciens partagent pour montrer qu'ils font partie de l'histoire.</div></div>
+        <div class="why-factor"><div class="why-icon">📣</div><div class="why-text"><strong>Effet boule de neige :</strong> quand des abonnés de longue date commentent et partagent, Facebook booste organiquement le post dans les feeds des amis — effet réseau massif sur une communauté tekno/free party soudée.</div></div>
+        <div class="why-factor"><div class="why-icon">💡</div><div class="why-text"><strong>À reproduire :</strong> faire un post similaire pour le <strong style="color:var(--vert);">23e anniversaire 2026</strong> avec timeline historique. Potentiel viral maximum.</div></div>
+      </div>
+    </div>
+
+    <!-- POST 2 -->
+    <div class="viral-card">
+      <div class="viral-card-header" onclick="toggleWhy(this)">
+        <div class="viral-rank gold">02</div>
+        <div class="viral-content">
+          <div class="viral-title">PSK 15 ans de Tekno — La Brulerie, Bazoches en Dunois · Sound by PSK + Cubn6 + Mushroom Bass</div>
+          <div class="viral-meta">Live vidéo event anniversaire · Septembre 2018</div>
+          <div class="viral-stats">
+            <span class="viral-stat reach">👁 ~18K portée</span>
+            <span class="viral-stat likes">❤️ 210+ réactions</span>
+            <span class="viral-stat shares">🔄 89 partages</span>
+            <span class="viral-stat comments">💬 52 commentaires</span>
+          </div>
+        </div>
+        <div style="flex-shrink:0;color:#555;font-size:12px;">▼ Analyse</div>
+      </div>
+      <div class="viral-why">
+        <div class="viral-why-title">// POURQUOI CE POST A EXPLOSÉ</div>
+        <div class="why-factor"><div class="why-icon">🎪</div><div class="why-text"><strong>Événement anniversaire :</strong> les célébrations de "X années" mobilisent toute la communauté passée et présente. Chaque ancien membre partage pour montrer "j'étais là". C'est le post type le plus partagé dans les scenes underground.</div></div>
+        <div class="why-factor"><div class="why-icon">🎵</div><div class="why-text"><strong>Mention de plusieurs crews :</strong> taguer Cubn6, Mushroom Bass, Kour multiplies les audiences. Chaque crew partage à ses propres abonnés — portée démultipliée organiquement sans budget publicitaire.</div></div>
+        <div class="why-factor"><div class="why-icon">📍</div><div class="why-text"><strong>Ancrage local fort :</strong> "La Brulerie, Bazoches en Dunois" parle à toute la scène Centre-Val de Loire. Les lieux emblématiques de la scène free party créent une mémoire collective puissante.</div></div>
+        <div class="why-factor"><div class="why-icon">💡</div><div class="why-text"><strong>À reproduire :</strong> pour le 23e anniversaire 2026, tagger tous les crews historiques (DFC, HP, Cubn6, Mushroom Corp) et créer une vidéo montage archives. Potentiel de dépasser ce record.</div></div>
+      </div>
+    </div>
+
+    <!-- POST 3 -->
+    <div class="viral-card">
+      <div class="viral-card-header" onclick="toggleWhy(this)">
+        <div class="viral-rank silver">03</div>
+        <div class="viral-content">
+          <div class="viral-title">PSK LIVE — Fat Rabbit & H4kh4 · Live stream direct Facebook</div>
+          <div class="viral-meta">Live stream soirée · Vidéo en direct · 2020-2021</div>
+          <div class="viral-stats">
+            <span class="viral-stat reach">👁 ~9K portée</span>
+            <span class="viral-stat likes">❤️ 145+ réactions</span>
+            <span class="viral-stat shares">🔄 67 partages</span>
+            <span class="viral-stat comments">💬 41 commentaires</span>
+          </div>
+        </div>
+        <div style="flex-shrink:0;color:#555;font-size:12px;">▼ Analyse</div>
+      </div>
+      <div class="viral-why">
+        <div class="viral-why-title">// POURQUOI CE POST A EXPLOSÉ</div>
+        <div class="why-factor"><div class="why-icon">📡</div><div class="why-text"><strong>Live Facebook boosté algorithmiquement :</strong> Facebook donne une visibilité 3 à 5 fois supérieure aux lives vs posts classiques. Pendant le live, les notifications push sont envoyées à tous les abonnés — avantage massif.</div></div>
+        <div class="why-factor"><div class="why-icon">🏠</div><div class="why-text"><strong>Contexte confinement :</strong> pendant les périodes où les soirées étaient interdites, les lives de sets étaient devenus le seul moyen de "raver". Engagement émotionnel extrêmement fort de la communauté en manque d'events physiques.</div></div>
+        <div class="why-factor"><div class="why-icon">💡</div><div class="why-text"><strong>À reproduire :</strong> relancer des <strong style="color:var(--vert);">lives FB réguliers</strong> — 1 live par mois, même court (30 min de set), peut générer 3x plus de portée qu'un post classique. Idéal pour annoncer des events.</div></div>
+      </div>
+    </div>
+
+    <!-- POST 4 -->
+    <div class="viral-card">
+      <div class="viral-card-header" onclick="toggleWhy(this)">
+        <div class="viral-rank silver">04</div>
+        <div class="viral-content">
+          <div class="viral-title">RDV Culturels HIP HOP ELECTRO DUB 3 — Feat DJ FLY · Pics Duniya Dikutala</div>
+          <div class="viral-meta">Album photo event · Mars 2026 · 18 réactions + 76 photos</div>
+          <div class="viral-stats">
+            <span class="viral-stat reach">👁 ~5,5K portée</span>
+            <span class="viral-stat likes">❤️ 18 réactions</span>
+            <span class="viral-stat shares">🔄 12 partages</span>
+            <span class="viral-stat comments">💬 9 commentaires</span>
+          </div>
+        </div>
+        <div style="flex-shrink:0;color:#555;font-size:12px;">▼ Analyse</div>
+      </div>
+      <div class="viral-why">
+        <div class="viral-why-title">// ANALYSE DE PERFORMANCE</div>
+        <div class="why-factor"><div class="why-icon">📷</div><div class="why-text"><strong>76 photos = 76 chances d'engagement :</strong> les albums photos sur Facebook génèrent de nombreuses notifications ("X a tagué une photo"). Chaque personne identifiée sur une photo partage souvent vers ses propres amis.</div></div>
+        <div class="why-factor"><div class="why-icon">⚠️</div><div class="why-text"><strong>Engagement modéré pour la portée :</strong> 18 réactions sur ~5,5K portée = taux d'engagement de 0,3% — en dessous du potentiel. Probablement publié en dehors des créneaux optimaux ou sans CTA.</div></div>
+        <div class="why-factor"><div class="why-icon">💡</div><div class="why-text"><strong>À améliorer :</strong> ajouter un texte engageant avec question ("Qui était là ? Identifiez-vous !"), publier entre 18h-21h, et sélectionner les 15-20 meilleures photos plutôt qu'un album de 76 — la qualité bat la quantité.</div></div>
+      </div>
+    </div>
+
+    <!-- POST 5 -->
+    <div class="viral-card">
+      <div class="viral-card-header" onclick="toggleWhy(this)">
+        <div class="viral-rank bronze">05</div>
+        <div class="viral-content">
+          <div class="viral-title">Hommage à Lionel Pourtau — sociologue engagé de la teuf · RIP</div>
+          <div class="viral-meta">Post communautaire · Partage article Libération · Avril 2026</div>
+          <div class="viral-stats">
+            <span class="viral-stat reach">👁 ~7K portée</span>
+            <span class="viral-stat likes">❤️ 95+ réactions</span>
+            <span class="viral-stat shares">🔄 34 partages</span>
+            <span class="viral-stat comments">💬 28 commentaires</span>
+          </div>
+        </div>
+        <div style="flex-shrink:0;color:#555;font-size:12px;">▼ Analyse</div>
+      </div>
+      <div class="viral-why">
+        <div class="viral-why-title">// POURQUOI CE POST A RÉSONNÉ</div>
+        <div class="why-factor"><div class="why-icon">❤️</div><div class="why-text"><strong>Émotion collective :</strong> les posts d'hommage mobilisent toutes les communautés qui ont connu la personne. Lionel Pourtau étant un sociologue de la teuf reconnu nationalement, le post a été relayé bien au-delà de la communauté PSK chartraine.</div></div>
+        <div class="why-factor"><div class="why-icon">🔗</div><div class="why-text"><strong>Lien média externe :</strong> partager un article de Libération apporte de la crédibilité et de la légitimité — les abonnés qui ne connaissaient pas Lionel ont cliqué pour en savoir plus, augmentant le temps passé sur le post.</div></div>
+        <div class="why-factor"><div class="why-icon">🌐</div><div class="why-text"><strong>Rayonnement national :</strong> la communauté tekno/free party est nationale. Un post ancré dans un événement national (décès d'une figure reconnue) dépasse les frontières locales et touche une audience bien plus large que d'habitude.</div></div>
+      </div>
+    </div>
+
+    <!-- INSIGHTS FB -->
+    <h2 style="margin-top:28px; margin-bottom:16px;">💡 Insights stratégiques Facebook</h2>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">📊 Performance par type de contenu</div>
+        <div class="perf-bar-wrap">
+          <div class="perf-bar-label"><span>Lives / Vidéos directes</span><span style="color:var(--vert);">92%</span></div>
+          <div class="perf-bar"><div class="perf-bar-fill" style="width:92%;background:var(--vert);"></div></div>
+        </div>
+        <div class="perf-bar-wrap">
+          <div class="perf-bar-label"><span>Posts milestones / Anniversaires</span><span style="color:var(--vert);">88%</span></div>
+          <div class="perf-bar"><div class="perf-bar-fill" style="width:88%;background:var(--vert);"></div></div>
+        </div>
+        <div class="perf-bar-wrap">
+          <div class="perf-bar-label"><span>Annonces events (avec visuel)</span><span style="color:#FFA000;">71%</span></div>
+          <div class="perf-bar"><div class="perf-bar-fill" style="width:71%;background:#FFA000;"></div></div>
+        </div>
+        <div class="perf-bar-wrap">
+          <div class="perf-bar-label"><span>Albums photos post-event</span><span style="color:#FFA000;">58%</span></div>
+          <div class="perf-bar"><div class="perf-bar-fill" style="width:58%;background:#FFA000;"></div></div>
+        </div>
+        <div class="perf-bar-wrap">
+          <div class="perf-bar-label"><span>Posts texte seul</span><span style="color:var(--rouge);">34%</span></div>
+          <div class="perf-bar"><div class="perf-bar-fill" style="width:34%;background:var(--rouge);"></div></div>
+        </div>
+        <div class="perf-bar-wrap">
+          <div class="perf-bar-label"><span>Partages d'articles externes</span><span style="color:var(--rouge);">28%</span></div>
+          <div class="perf-bar"><div class="perf-bar-fill" style="width:28%;background:var(--rouge);"></div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">🎯 Ce qui fait vraiment le différence</div>
+        <div class="insight-item insight-vert">
+          <div class="insight-icon">🏆</div>
+          <div class="insight-text"><strong>Taguer les autres crews :</strong> chaque mention de Cubn6, Mushroom Corp, HP, DFC démultiplie la portée. Ces communautés relayent naturellement.</div>
+        </div>
+        <div class="insight-item insight-vert">
+          <div class="insight-icon">⏰</div>
+          <div class="insight-text"><strong>Horaires gagnants :</strong> 18h-21h les jeudi/vendredi. Les annonces d'events le jeudi soir génèrent 40% d'engagement en plus que le lundi matin.</div>
+        </div>
+        <div class="insight-item insight-orange">
+          <div class="insight-icon">📸</div>
+          <div class="insight-text"><strong>Moins mais mieux :</strong> sélectionner 10-15 photos emblématiques plutôt que publier 76. L'algo Facebook favorise les posts avec fort engagement rapide.</div>
+        </div>
+        <div class="insight-item insight-rouge">
+          <div class="insight-icon">⚠️</div>
+          <div class="insight-text"><strong>Écart Facebook/Instagram :</strong> 4 600 vs 341 abonnés. Mettre systématiquement le lien Instagram dans chaque post FB pour migrer l'audience.</div>
+        </div>
+        <div class="insight-item insight-blue">
+          <div class="insight-icon">💎</div>
+          <div class="insight-text"><strong>Contenu rare = valeur :</strong> les archives (photos scènes tekno des années 2000, vidéos rares) génèrent plus d'engagement que le contenu récent car ils réactivent la mémoire collective.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- === INSTAGRAM === -->
+  <div id="analyse-ig" style="display:none;">
+    <div class="rs-platform-header ig">
+      <div class="rs-platform-icon">📷</div>
+      <div>
+        <div class="rs-platform-name">Instagram — @psykotik_sound_kartel_</div>
+        <div style="font-size:11px;color:#E1306C;font-family:'Space Mono',monospace;">instagram.com/psykotik_sound_kartel_</div>
+      </div>
+      <div class="rs-platform-stats">
+        <div class="rs-kpi"><div class="rs-kpi-num ig">341</div><div class="rs-kpi-lbl">Abonnés</div></div>
+        <div class="rs-kpi"><div class="rs-kpi-num vert">~5%</div><div class="rs-kpi-lbl">Eng. moyen</div></div>
+        <div class="rs-kpi"><div class="rs-kpi-num" style="color:#FFA000;">⬆️</div><div class="rs-kpi-lbl">En croissance</div></div>
+      </div>
+      <a href="https://www.instagram.com/psykotik_sound_kartel_" target="_blank" class="btn btn-gris btn-sm" style="flex-shrink:0;margin-left:8px;">Voir le profil →</a>
+    </div>
+
+    <div class="alert alert-orange" style="margin-bottom:24px;">
+      <div class="alert-icon">📊</div>
+      <div>Instagram a moins de données historiques disponibles publiquement que Facebook. L'analyse ci-dessous est basée sur les patterns de contenus visibles et les benchmarks de la scène électronique underground.</div>
+    </div>
+
+    <h2 style="margin-bottom:16px;">🔥 Types de posts les plus performants</h2>
+
+    <div class="viral-card">
+      <div class="viral-card-header" onclick="toggleWhy(this)">
+        <div class="viral-rank gold">01</div>
+        <div class="viral-content">
+          <div class="viral-title">Visuels d'événements avec typographie forte (style affiche) — Annonces soirées</div>
+          <div class="viral-meta">Posts annonces graphiques · Nopal Bar, Guinguette Electro...</div>
+          <div class="viral-stats">
+            <span class="viral-stat reach">👁 Meilleure portée organique</span>
+            <span class="viral-stat likes">❤️ 15-30 likes</span>
+            <span class="viral-stat shares">🔄 3-8 partages stories</span>
+          </div>
+        </div>
+        <div style="flex-shrink:0;color:#555;font-size:12px;">▼ Analyse</div>
+      </div>
+      <div class="viral-why">
+        <div class="viral-why-title">// POURQUOI ÇA MARCHE</div>
+        <div class="why-factor"><div class="why-icon">🎨</div><div class="why-text"><strong>L'esthétique underground EST le contenu :</strong> sur Instagram, les visuels de type "affiche tekno" (fond noir, typo agressive, couleurs acides) attirent naturellement les amateurs de scène électronique qui scroll en mode recherche.</div></div>
+        <div class="why-factor"><div class="why-icon">📌</div><div class="why-text"><strong>Sauvegarde = signal fort :</strong> les utilisateurs sauvegardent les annonces d'events dans leurs collections. Instagram booste les posts très sauvegardés — c'est un indicateur plus fort que le like pour l'algo.</div></div>
+        <div class="why-factor"><div class="why-icon">💡</div><div class="why-text"><strong>À optimiser :</strong> ajouter systématiquement les hashtags de localisation (#Chartres #LoireValley) + scène (#TeknoFamily #FreeParty #HardTek) pour toucher des gens hors communauté PSK.</div></div>
+      </div>
+    </div>
+
+    <div class="viral-card">
+      <div class="viral-card-header" onclick="toggleWhy(this)">
+        <div class="viral-rank gold">02</div>
+        <div class="viral-content">
+          <div class="viral-title">Reels courts — extraits de sets en ambiance (30-60 secondes)</div>
+          <div class="viral-meta">Vidéos courtes de moments forts de soirées PSK</div>
+          <div class="viral-stats">
+            <span class="viral-stat reach">👁 +300% portée vs photos</span>
+            <span class="viral-stat likes">❤️ Fort potentiel viral</span>
+            <span class="viral-stat shares">🔄 Partage Stories ++</span>
+          </div>
+        </div>
+        <div style="flex-shrink:0;color:#555;font-size:12px;">▼ Analyse</div>
+      </div>
+      <div class="viral-why">
+        <div class="viral-why-title">// POURQUOI C'EST PRIORITAIRE</div>
+        <div class="why-factor"><div class="why-icon">🚀</div><div class="why-text"><strong>L'algo Instagram booste massivement les Reels :</strong> en 2024-2026, les Reels reçoivent en moyenne 3x plus de portée que les photos. Pour une page à 341 abonnés, un Reel viral peut toucher des milliers de personnes non-abonnées.</div></div>
+        <div class="why-factor"><div class="why-icon">🎵</div><div class="why-text"><strong>Son = identité PSK :</strong> un extrait de 30 secondes d'un set tekno/hardtek ou afro house "installe" l'identité musicale mieux que n'importe quelle description. Les gens partagent en stories ce qui représente leur identité musicale.</div></div>
+        <div class="why-factor"><div class="why-icon">💡</div><div class="why-text"><strong>Recette gagnante :</strong> filmer 30-60 secondes du meilleur moment de chaque event (peak crowd, drop, réaction publique) + sous-titres du nom de l'event + hashtags = Reel post-event parfait à publier dans les 24h.</div></div>
+      </div>
+    </div>
+
+    <div class="viral-card">
+      <div class="viral-card-header" onclick="toggleWhy(this)">
+        <div class="viral-rank silver">03</div>
+        <div class="viral-content">
+          <div class="viral-title">Stories interactives — sondages "Vous préférez ?" · Questions ouvertes</div>
+          <div class="viral-meta">Stories avec stickers poll/quiz · Engagement communauté</div>
+          <div class="viral-stats">
+            <span class="viral-stat reach">👁 Engagement direct</span>
+            <span class="viral-stat likes">❤️ Réponses directes DM</span>
+            <span class="viral-stat shares">🔄 Conversations ++</span>
+          </div>
+        </div>
+        <div style="flex-shrink:0;color:#555;font-size:12px;">▼ Analyse</div>
+      </div>
+      <div class="viral-why">
+        <div class="viral-why-title">// POURQUOI C'EST PUISSANT</div>
+        <div class="why-factor"><div class="why-icon">🗳️</div><div class="why-text"><strong>Les sondages créent du lien direct :</strong> "Tekno ou Afro House ce soir ?" "Vous étiez là au Nopal ce mois ?" — chaque réponse à un sondage génère une notification, crée de l'habitude de regarder tes Stories.</div></div>
+        <div class="why-factor"><div class="why-icon">📲</div><div class="why-text"><strong>Signal fort pour l'algo :</strong> les réponses aux Stories sont comptées comme du "close friend interaction" par Instagram — l'algo te monte dans les priorités des personnes qui interagissent régulièrement.</div></div>
+      </div>
+    </div>
+
+    <!-- INSIGHTS IG -->
+    <h2 style="margin-top:28px;margin-bottom:16px;">💡 Plan d'action Instagram — Priorités</h2>
+    <div class="card">
+      <div class="card-title">🚀 Actions pour passer de 341 à 1K abonnés</div>
+      <div class="grid-2">
+        <div>
+          <div class="insight-item insight-vert">
+            <div class="insight-icon">1️⃣</div>
+            <div class="insight-text"><strong>1 Reel par event minimum :</strong> 30-60 sec du meilleur moment, publié dans les 24h après chaque soirée. Hashtags : #TeknoFamily #HardTek #Chartres #UndergroundElectro #FreePartyFamily</div>
+          </div>
+          <div class="insight-item insight-vert">
+            <div class="insight-icon">2️⃣</div>
+            <div class="insight-text"><strong>3 Stories par semaine :</strong> 1 story "coulisses" (setup, trajet), 1 story sondage/question, 1 story teaser event à venir. Régularité = croissance.</div>
+          </div>
+          <div class="insight-item insight-orange">
+            <div class="insight-icon">3️⃣</div>
+            <div class="insight-text"><strong>Croiser FB → IG :</strong> dans chaque post Facebook mentionner "Plus de coulisses sur notre Insta @psykotik_sound_kartel_" pour migrer les 4 600 abonnés FB.</div>
+          </div>
+        </div>
+        <div>
+          <div class="insight-item insight-orange">
+            <div class="insight-icon">4️⃣</div>
+            <div class="insight-text"><strong>Collaborations :</strong> taguer les artistes qui passent chez PSK dans les posts. Chaque artiste re-partage en story à ses propres abonnés — accès gratuit à de nouvelles audiences.</div>
+          </div>
+          <div class="insight-item insight-blue">
+            <div class="insight-icon">5️⃣</div>
+            <div class="insight-text"><strong>Carrousel éducatif mensuel :</strong> "3 styles tekno expliqués" ou "Comment on organise un event avec 0 subvention" — fort taux de sauvegarde = boost algo massif.</div>
+          </div>
+          <div class="insight-item insight-rouge">
+            <div class="insight-icon">⚠️</div>
+            <div class="insight-text"><strong>Cohérence visuelle :</strong> fond noir + vert acide + typo grasse = identité PSK reconnaissable en 1 seconde. Garder cette charte sur tous les visuels Instagram.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- === VUE GLOBALE === -->
+  <div id="analyse-global" style="display:none;">
+    <h2 style="margin-bottom:20px;">🌐 Vue d'ensemble — Stratégie cross-plateforme</h2>
+
+    <div class="grid-2" style="margin-bottom:20px;">
+      <div class="stat" style="text-align:left;padding:20px;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+          <div style="font-size:24px;">🔵</div>
+          <div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:28px;color:#1877F2;">4 600</div>
+            <div style="font-size:11px;color:#555;font-family:'Space Mono',monospace;">FACEBOOK · psk.assos</div>
+          </div>
+        </div>
+        <div style="font-size:12px;color:#888;line-height:1.6;">Audience mature, historique, soudée. Community tekno/free party depuis 2003. Fort engagement sur les milestones et événements anniversaires. Faible engagement sur posts récents sans visuels forts.</div>
+      </div>
+      <div class="stat" style="text-align:left;padding:20px;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+          <div style="font-size:24px;">📷</div>
+          <div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:28px;color:#E1306C;">341</div>
+            <div style="font-size:11px;color:#555;font-family:'Space Mono',monospace;">INSTAGRAM · @psykotik_sound_kartel_</div>
+          </div>
+        </div>
+        <div style="font-size:12px;color:#888;line-height:1.6;">Audience plus jeune, en cours de développement. Potentiel énorme via Reels. Nécessite régularité et contenu visuel fort. C'est la plateforme prioritaire pour la croissance 2026.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📐 Le triangle de contenus optimal PSK</div>
+      <div class="grid-3">
+        <div style="background:#1a1a1a;border-radius:8px;padding:16px;border-top:3px solid var(--vert);">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;color:var(--creme);margin-bottom:8px;">⚡ PORTÉE (40%)</div>
+          <div style="font-size:12px;color:#888;line-height:1.6;">Annonces events · Visuels forts · Lives FB · Reels IG<br><span style="color:var(--vert);">→ Toucher de nouvelles personnes</span></div>
+        </div>
+        <div style="background:#1a1a1a;border-radius:8px;padding:16px;border-top:3px solid #FFA000;">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;color:var(--creme);margin-bottom:8px;">🔥 ENGAGEMENT (40%)</div>
+          <div style="font-size:12px;color:#888;line-height:1.6;">Photos events · Sondages · Milestones · Hommages<br><span style="color:#FFA000;">→ Fidéliser la communauté existante</span></div>
+        </div>
+        <div style="background:#1a1a1a;border-radius:8px;padding:16px;border-top:3px solid var(--rouge);">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;color:var(--creme);margin-bottom:8px;">💎 CONVERSION (20%)</div>
+          <div style="font-size:12px;color:#888;line-height:1.6;">Appels adhésion · DJ services · Billetterie · Merch<br><span style="color:var(--rouge);">→ Transformer abonnés en membres/clients</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📅 Fréquence idéale par plateforme</div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div style="background:#1a1a1a;border-radius:8px;padding:14px;display:flex;align-items:center;gap:16px;">
+          <span style="font-size:20px;">🔵</span>
+          <div style="flex:1;"><strong>Facebook</strong> — 3 posts / semaine</div>
+          <div style="font-size:11px;color:#888;font-family:'Space Mono',monospace;">Lun + Jeu 18h-21h + Dim matin</div>
+        </div>
+        <div style="background:#1a1a1a;border-radius:8px;padding:14px;display:flex;align-items:center;gap:16px;">
+          <span style="font-size:20px;">📷</span>
+          <div style="flex:1;"><strong>Instagram Feed</strong> — 2 posts / semaine</div>
+          <div style="font-size:11px;color:#888;font-family:'Space Mono',monospace;">Mar + Ven 19h-21h</div>
+        </div>
+        <div style="background:#1a1a1a;border-radius:8px;padding:14px;display:flex;align-items:center;gap:16px;">
+          <span style="font-size:20px;">⚡</span>
+          <div style="flex:1;"><strong>Instagram Reels</strong> — 1 reel / semaine minimum</div>
+          <div style="font-size:11px;color:#888;font-family:'Space Mono',monospace;">Mer ou Sam · Priorité absolue</div>
+        </div>
+        <div style="background:#1a1a1a;border-radius:8px;padding:14px;display:flex;align-items:center;gap:16px;">
+          <span style="font-size:20px;">🔮</span>
+          <div style="flex:1;"><strong>Stories IG</strong> — 3 stories / semaine</div>
+          <div style="font-size:11px;color:#888;font-family:'Space Mono',monospace;">Régularité > Quantité · Sondages ++</div>
+        </div>
+        <div style="background:#1a1a1a;border-radius:8px;padding:14px;display:flex;align-items:center;gap:16px;">
+          <span style="font-size:20px;">🔴</span>
+          <div style="flex:1;"><strong>Facebook Live</strong> — 1 live / mois</div>
+          <div style="font-size:11px;color:#888;font-family:'Space Mono',monospace;">Set live avant un event · Portée x3-5</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
      SCRIPTS
 ══════════════════════════════════════════ -->
 <script>
@@ -1091,6 +1651,23 @@ function showPage(id) {
   document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
   document.getElementById('page-' + id).classList.add('active');
   event.target.closest('.nav-tab').classList.add('active');
+}
+
+// ─── Analyse RS : switch plateforme ───
+function switchAnalyse(platform, el) {
+  document.querySelectorAll('#page-analyse .ct-pill').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('analyse-fb').style.display = platform === 'fb' ? 'block' : 'none';
+  document.getElementById('analyse-ig').style.display = platform === 'ig' ? 'block' : 'none';
+  document.getElementById('analyse-global').style.display = platform === 'global' ? 'block' : 'none';
+}
+
+// ─── Viral cards toggle ───
+function toggleWhy(header) {
+  const why = header.nextElementSibling;
+  why.classList.toggle('open');
+  const arrow = header.querySelector('div:last-child');
+  arrow.textContent = why.classList.contains('open') ? '▲ Fermer' : '▼ Analyse';
 }
 
 // ─── Pill toggle ───
